@@ -1,0 +1,19 @@
+<body>
+  <title>verwaltung.io</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name = "viewport" content = "width = device-width, user-scalable = no">
+</body>
+
+<body>
+</body>
+
+<template name="layout">
+  <div id="{{pageLayout}}" class="flexContainer flexColumn">
+    {{>pageHeader}}
+    <div id="{{pageTemplate}}" class="page flexContainer flex">
+      {{>navigation}}
+      {{{yield}}}
+    </div>
+  </div>
+</template>

@@ -1,0 +1,9 @@
+<template name="navigation">
+  <nav id="navigation" class="flexContainer flexColumn">
+    {{#each libraries}}
+      <a href="{{libraryPath}}" data-icon="l">{{title}}</a>
+    {{/each}}
+    <div class="flex"></div>
+    <a href="{{createLibraryPath}}" data-icon="a" class="new">Neue Bibliothek</a>
+  </nav>
+</template>
