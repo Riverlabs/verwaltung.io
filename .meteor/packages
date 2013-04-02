@@ -8,8 +8,6 @@ backbone
 handlebars
 accounts-base
 accounts-password
-accounts-google
-accounts-facebook
 preserve-inputs
 mini-pages
 jquery-ui
