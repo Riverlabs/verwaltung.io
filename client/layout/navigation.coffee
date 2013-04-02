@@ -1,3 +1,8 @@
+Meteor.autorun ->
+  window.librariesHandler = Meteor.subscribe "libraries"
+
 _.extend Template.navigation,
   libraries: ->
-    return [(_id: 'protokolle', title: 'Protokolle'),(_id: 'einladungen', title: 'Einladungen')]
+    Libraries.find()
+  activeClass: ->
+    'active' if @_id is Meteor.router.pages().invocation().library

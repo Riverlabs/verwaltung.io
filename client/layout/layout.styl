@@ -1,9 +1,49 @@
-#layout
+#pageLoading
+  text-align center
+  margin-top 30%
+  h1
+    font-size 16px
+    margin-bottom 20px
+  progress
+    width: 250px
+
+#browserNotSupported
+  text-align center
+  width 400px
+  margin 30% auto 0
+
+
+
+.framelessLayout
+  width 300px
+  margin 40px auto
   height 100%
-  width 1150px
-  margin 0 auto
+  .logo
+    margin 0 auto
+    width 200px
+  .page
+    border-top 4px solid #C0190C
+    background #FbFbFb
+    margin-top 20px
+    header
+      text-align center
+      h1
+        font-size 16px
+        font-weight bold
+        margin 10px 0
+
+
+.layout
+  height 100%
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  box-align: center;
+  width: 100%
+
   .page
     background #fff
+    width 100%
+    max-width 1000px
     aside
       padding 25px
       width 200px
@@ -76,3 +116,19 @@
       box-shadow inset 1px 0 0 #F4F4F4
       // border-left 1px solid rgba(#000, 0.03)
       border-top 4px solid #971109
+      position relative
+      .actions
+        position absolute
+        right 15px
+        top 35px
+        a
+          font-size 14px
+          font-weight bold
+          color rgba(#000, 0.25)
+          margin-right 15px
+          &:hover
+            color rgba(#000, 0.5)
+          &:before
+            font-size 27px
+            padding-top 5px
+            display inline-block

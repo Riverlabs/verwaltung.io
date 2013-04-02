@@ -1,14 +1,72 @@
 <template name="library">
-  <aside class="steps">
-    <h1>Neues Protokoll</h1>
-    <h3>Protokolle werden zu jeder Sitzung angefertigt und an alle Mitglieder gesendet.</h3>
-    <ul class="steps">
-      <li class="done">Datum &amp; Teilnehmer</li>
-      <li class="active">Inhalte</li>
-      <li>Speichern &amp; Teilen</li>
-    </ul>
-  </aside>
-  <section class="content flex">
-    Main Library
-  </section>
+  {{#with library}}
+    <section class="content flex">
+      <div class="actions">
+        <a href="{{editLibraryPath}}" data-icon="l" class="new">
+          Bibliothek bearbeiten
+        </a>
+        <a href="{{createLibraryItemPath}}" data-icon="a" class="new">
+          Neues Protokoll
+        </a>
+      </div>
+      <h1>{{title}}</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Datum</th>
+            <th>Sitzung</th>
+            <th>Ausschuss</th>
+            <th>Öffentlich</th>
+            
+            <th>Beginn</th>
+            <th>Schluss</th>
+            <th>Vorsitz</th>
+            <th>Tagesordnung</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>01.11.12</td>
+            <td>15.</td>
+            <td>Arbeit, Integration, Berufliche Bildung und Frauen</td>
+            <td>Ja</td>
+            <td>10:03 Uhr</td>
+            <td>12:14 Uhr</td>
+            <td>Anja Kofbinger</td>
+            <td>4 Themen</td>
+          </tr>
+          <tr>
+            <td>01.11.12</td>
+            <td>15.</td>
+            <td>Arbeit, Integration, Berufliche Bildung und Frauen</td>
+            <td>Ja</td>
+            <td>10:03 Uhr</td>
+            <td>12:14 Uhr</td>
+            <td>Anja Kofbinger</td>
+            <td>4 Themen</td>
+          </tr>
+          <tr>
+            <td>01.11.12</td>
+            <td>15.</td>
+            <td>Arbeit, Integration, Berufliche Bildung und Frauen</td>
+            <td>Ja</td>
+            <td>10:03 Uhr</td>
+            <td>12:14 Uhr</td>
+            <td>Anja Kofbinger</td>
+            <td>4 Themen</td>
+          </tr>          
+          <tr>
+            <td>01.11.12</td>
+            <td>15.</td>
+            <td>Arbeit, Integration, Berufliche Bildung und Frauen</td>
+            <td>Ja</td>
+            <td>10:03 Uhr</td>
+            <td>12:14 Uhr</td>
+            <td>Anja Kofbinger</td>
+            <td>4 Themen</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  {{/with}}
 </template>

@@ -1,0 +1,27 @@
+<template name="login">
+  <div class="{{pageLayout}}" id="{{pageTemplate}}">
+    {{>logo}}
+    <section class="page small">
+      <form>
+        {{>message}}
+        <fieldset>
+          <p class="fieldContainer flexContainer">
+            <label for="username">E-Mail-Adresse</label><input type="email" id="email" name="email" required class="flex" autofocus placeholder="lieschen@mueller.de">
+          </p>
+          <p class="fieldContainer flexContainer">
+            <label for="username">Passwort</label><input type="password" id="password" name="password" required class="flex" placeholder="(min. 6 Zeichen)">
+          </p>
+        </fieldset>
+        <div class="submitContainer">
+          <button>Anmelden</button>
+        </div>
+      </form>
+    </section>
+    <div class="switchAuth">
+      Noch kein Konto? 
+      <a href="{{registerPath}}">
+        Jetzt Konto eröffnen.
+      </a>
+    </div>
+  </div>
+</template>

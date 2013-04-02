@@ -1,0 +1,34 @@
+#library
+  .content
+    position relative
+    h1
+      font-weight normal
+      font-size 25px
+      line-height 35px
+      margin-bottom 20px
+    table
+      width 100%
+      th, td
+        padding 5px 10px
+        word-wrap break-word
+        white-space nowrap
+        overflow hidden
+        text-overflow ellipsis
+        max-width 100px
+      tbody
+        tr
+          td
+            border-bottom 1px solid #eee
+            &:first-of-type
+              border-left 1px solid #eee
+            &:last-of-type
+              border-right 1px solid #eee
+          &:nth-of-type(odd)
+            td
+              background #f8f8f8
+
+      thead
+        th
+          background #3f3f3f
+          color #fff
+          font-weight 600

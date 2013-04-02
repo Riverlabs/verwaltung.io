@@ -9,11 +9,29 @@
 </body>
 
 <template name="layout">
-  <div id="{{pageLayout}}" class="flexContainer flexColumn">
+  <div class="{{pageLayout}} flexContainer flexColumn">
     {{>pageHeader}}
     <div id="{{pageTemplate}}" class="page flexContainer flex">
       {{>navigation}}
       {{{yield}}}
     </div>
+  </div>
+</template>
+
+<template name="framelessLayout">
+  {{{yield}}}
+</template>
+
+<template name="loading">
+  <div id="pageLoading">
+    <h1>Applikation wird geladen, bitte warten...</h1>
+    <progress></progress>
+  </div>
+</template>
+
+<template name="browserNotSupported">
+  <div id="browserNotSupported">
+    Ihr Browser wird im Augenblick noch nicht unterstützt. <br>
+    Bitte benutzen Sie <a href="https://www.google.com/chrome">Google Chrome</a>.
   </div>
 </template>
