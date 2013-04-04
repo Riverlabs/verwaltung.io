@@ -1,7 +1,7 @@
 <template name="library">
   {{#with library}}
     <section class="content flex inner">
-      <div class="actions">
+      <div class="actions topActions">
         <a href="{{editLibraryPath}}" data-icon="s" class="new">
           Bibliothek bearbeiten
         </a>
@@ -14,12 +14,13 @@
       </div>
       <h1>{{title}}</h1>
       {{>message}}
-      <table>
+      <table class="libraryItems">
         <thead>
           <tr>
             {{#each fields}}
             <th>{{title}}</th>
             {{/each}}
+            <th class="actions">Aktionen</th>
           </tr>
         </thead>
         <tbody>
@@ -37,5 +38,6 @@
     {{#each values}}
     <td>{{value}}</td>
     {{/each}}
+    <td class="actions"><a href="{{editLibraryItemPath}}" data-icon="e" title="Bearbeiten"></a> <a href="{{removeLibraryItemPath}}" data-icon="d" title="Löschen"></a></td>
   </tr>
 </template>

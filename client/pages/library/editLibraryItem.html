@@ -1,0 +1,28 @@
+<template name="editLibraryItem">
+  {{#with library}}
+  <section class="content flex">
+    <form class="flexContainer flexColumn">
+      <footer class="submitContainer topContainer flexContainer">
+        <a href="{{libraryPath}}">‹ Zurück zur Bibliothek</a>
+        <div class="flex"></div>
+        <input type="submit" value="Eintrag speichern">
+      </footer>
+      {{>message}}
+      <div class="inner flex">
+        <h1>Eintrag bearbeiten</h1>
+        <fieldset>
+          {{#each fields}}
+            {{>editLibraryItemField}}
+          {{else}}
+            Bisher gibt es keine Felder in diesem Formular. Legen Sie jetzt das erste Feld an.
+          {{/each}}
+        </fieldset>
+      </div>
+    </form>
+  </section>
+  {{/with}}
+</template>
+
+<template name="editLibraryItemField">
+  {{{field}}}
+</template>

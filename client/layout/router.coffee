@@ -1,6 +1,9 @@
 setLibrary = () ->
   @set 'library', @params._id
 
+setLibraryItem = () ->
+  @set 'libraryItem', @params._id
+
 createLibrary = () ->
   library = Libraries.insert created: new Date()
   Meteor.go Meteor.editLibraryPath({_id: library})
@@ -12,6 +15,14 @@ removeLibrary = () ->
     Session.set 'message', type: 'success', text: 'Die Bibliothek wurde erfolgreich gelöscht.'
   else
     Meteor.go Meteor.editLibraryPath({_id: @params._id})
+  return @stop()
+
+removeLibraryItem = () ->
+  libraryId = LibraryItems.findOne(@params._id).library
+  if confirm 'Wollen Sie diesen Eintrag wirklich unwiderruflich löschen?'
+    LibraryItems.remove @params._id
+    Session.set 'message', type: 'success', text: 'Der Eintrag wurde erfolgreich gelöscht.'
+  Meteor.go Meteor.libraryPath(_id: libraryId)
   return @stop()
 
 isPublicPage = (page) ->
@@ -31,10 +42,13 @@ Meteor.pages
   '/logout': logout
   '/library/create': to: 'editLibrary', as: 'createLibrary', before: [createLibrary]
   '/library/:_id': to: 'library', before: [setLibrary]
-  '/library/:_id/create': to: 'createLibraryItem', before: [setLibrary]
   '/library/:_id/edit': to: 'editLibrary', before: [setLibrary]
   '/library/:_id/form': to: 'editLibraryForm', before: [setLibrary]
   '/library/:_id/remove': to: 'dashboard', as: 'removeLibrary', before: [removeLibrary]
+  '/library/:_id/create': to: 'createLibraryItem', before: [setLibrary]
+  '/library/item/:_id/edit': to: 'editLibraryItem', before: [setLibraryItem]
+  '/library/item/:_id/remove': to: 'library', as: 'removeLibraryItem', before: [removeLibraryItem]
+
 , defaults:
   layout: 'layout'
   before: () ->
