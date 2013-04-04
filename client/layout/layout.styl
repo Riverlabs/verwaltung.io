@@ -12,72 +12,6 @@
   width 400px
   margin 30% auto 0
 
-form
-  position absolute // for 100% height in flex box
-  height 100%
-  width 100%
-  .message
-    padding 15px 25px
-  fieldset
-    border-bottom 1px solid rgba(#000, 0.1)
-    padding 25px 0
-    &:last-of-type
-      border-bottom none
-  label
-    display block
-    padding 20px 0 5px 0
-    font-size 17px
-    font-weight 500
-    small
-      display block
-      font-size 13px
-      color rgba(#000, 0.5)
-  input, textarea
-    background #fff
-    border 1px solid rgba(#000, 0.15)
-    padding 10px 10px
-    box-sizing border-box
-    &:focus
-      outline none
-      border-color #C0190C
-    &[type=submit], &[type=button]
-      font-weight bold
-      padding 10px 20px
-      color #fff
-      background #C0190C
-      cursor pointer
-    &[disabled]
-      opacity 0.5
-    &.description, &.title
-      border none
-      background none
-    &.title
-      font-size 17px
-      padding 10px 0 5px 0
-    &.description
-      color rgba(#000, 0.5)
-      padding 0px 0 5px 0
-  input[type=text], textarea
-    width 100%
-  textarea
-    min-height 100px
-.submitContainer
-  background rgba(#000, 0.05)
-  border-bottom 1px solid rgba(#000, 0.1)
-  height 51px
-  overflow hidden
-  box-sizing border-box
-  padding 5px 25px
-  a, .info
-    line-height 43px
-  .info
-    color rgba(#000, 0.25)
-  &.topContainer
-    padding-top 14px
-    height 71px
-    a, .info
-      line-height 43px
-
 
 
 h1
@@ -186,6 +120,71 @@ h3
       // border-left 1px solid rgba(#000, 0.03)
       border-top 4px solid #971109
       position relative
+      form
+        position absolute // for 100% height in flex box
+        height 100%
+        width 100%
+        .message
+          padding 15px 25px
+        fieldset
+          border-bottom 1px solid rgba(#000, 0.1)
+          padding 25px 0
+          &:last-of-type
+            border-bottom none
+        label
+          display block
+          padding 20px 0 5px 0
+          font-size 17px
+          font-weight 500
+          small
+            display block
+            font-size 13px
+            color rgba(#000, 0.5)
+        input, textarea
+          background #fff
+          border 1px solid rgba(#000, 0.15)
+          padding 10px 10px
+          box-sizing border-box
+          &:focus
+            outline none
+            border-color #C0190C
+          &[type=submit], &[type=button]
+            font-weight bold
+            padding 10px 20px
+            color #fff
+            background #C0190C
+            cursor pointer
+          &[disabled]
+            opacity 0.5
+          &.description, &.title
+            border none
+            background none
+          &.title
+            font-size 17px
+            padding 10px 0 5px 0
+          &.description
+            color rgba(#000, 0.5)
+            padding 0px 0 5px 0
+        input[type=text], textarea
+          width 100%
+        textarea
+          min-height 100px
+      .submitContainer
+        background rgba(#000, 0.05)
+        border-bottom 1px solid rgba(#000, 0.1)
+        height 51px
+        overflow hidden
+        box-sizing border-box
+        padding 5px 25px
+        a, .info
+          line-height 43px
+        .info
+          color rgba(#000, 0.25)
+        &.topContainer
+          padding-top 14px
+          height 71px
+          a, .info
+            line-height 43px
       .actions
         position absolute
         right 15px
