@@ -1,72 +1,41 @@
 <template name="library">
   {{#with library}}
-    <section class="content flex">
+    <section class="content flex inner">
       <div class="actions">
-        <a href="{{editLibraryPath}}" data-icon="l" class="new">
+        <a href="{{editLibraryPath}}" data-icon="s" class="new">
           Bibliothek bearbeiten
         </a>
-        <a href="{{createLibraryItemPath}}" data-icon="a" class="new">
-          Neues Protokoll
+        <a href="{{editLibraryFormPath}}" data-icon="f" class="new">
+          Formular bearbeiten
+        </a>
+        <a href="{{createLibraryItemPath}}" data-icon="n" class="new">
+          Eintrag hinzufügen
         </a>
       </div>
       <h1>{{title}}</h1>
+      {{>message}}
       <table>
         <thead>
           <tr>
-            <th>Datum</th>
-            <th>Sitzung</th>
-            <th>Ausschuss</th>
-            <th>Öffentlich</th>
-            
-            <th>Beginn</th>
-            <th>Schluss</th>
-            <th>Vorsitz</th>
-            <th>Tagesordnung</th>
+            {{#each fields}}
+            <th>{{title}}</th>
+            {{/each}}
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>01.11.12</td>
-            <td>15.</td>
-            <td>Arbeit, Integration, Berufliche Bildung und Frauen</td>
-            <td>Ja</td>
-            <td>10:03 Uhr</td>
-            <td>12:14 Uhr</td>
-            <td>Anja Kofbinger</td>
-            <td>4 Themen</td>
-          </tr>
-          <tr>
-            <td>01.11.12</td>
-            <td>15.</td>
-            <td>Arbeit, Integration, Berufliche Bildung und Frauen</td>
-            <td>Ja</td>
-            <td>10:03 Uhr</td>
-            <td>12:14 Uhr</td>
-            <td>Anja Kofbinger</td>
-            <td>4 Themen</td>
-          </tr>
-          <tr>
-            <td>01.11.12</td>
-            <td>15.</td>
-            <td>Arbeit, Integration, Berufliche Bildung und Frauen</td>
-            <td>Ja</td>
-            <td>10:03 Uhr</td>
-            <td>12:14 Uhr</td>
-            <td>Anja Kofbinger</td>
-            <td>4 Themen</td>
-          </tr>          
-          <tr>
-            <td>01.11.12</td>
-            <td>15.</td>
-            <td>Arbeit, Integration, Berufliche Bildung und Frauen</td>
-            <td>Ja</td>
-            <td>10:03 Uhr</td>
-            <td>12:14 Uhr</td>
-            <td>Anja Kofbinger</td>
-            <td>4 Themen</td>
-          </tr>
+          {{#each items}}
+            {{>libraryTableItem}}
+          {{/each}}
         </tbody>
       </table>
     </section>
   {{/with}}
+</template>
+
+<template name="libraryTableItem">
+  <tr>
+    {{#each values}}
+    <td>{{value}}</td>
+    {{/each}}
+  </tr>
 </template>

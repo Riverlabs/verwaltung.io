@@ -1,0 +1,66 @@
+<template name="editLibraryForm">
+  {{#with library}}
+  <section class="content flex">
+    <form class="flexContainer flexColumn">
+      <footer class="submitContainer topContainer flexContainer">
+        <a href="{{libraryPath}}">‹ Zurück zur Bibliothek</a>
+        <div class="flex"></div>
+        <p class="info">Änderungen werden autom. gespeichert.</p>
+{{!         <input type="submit" value="Änderungen speichern"> }}
+      </footer>
+      {{>message}}
+      <div class="inner flex">
+        <h1>Formular bearbeiten</h1>
+        <fieldset>
+          {{#each fields}}
+            {{>editLibraryFormField}}
+          {{else}}
+            Bisher gibt es keine Felder in diesem Formular. Legen Sie jetzt das erste Feld an.
+          {{/each}}
+        </fieldset>
+        <fieldset>
+          <select id="addInputType">
+            <optgroup label="Text">
+              <option value="text" selected>Textfeld (einzelig)</option>
+              <option value="textarea">Textbereich (mehrzeilig)</option>
+            </optgroup>
+            <optgroup label="Auswahl">
+              <option value="multiselect">Auswahl</option>
+              <option value="select">Mehrfachauswahl</option>
+              <option value="tags">Stichworte (autom. Vervollständigung)</option>
+              <option value="color">Farbe</option>
+            </optgroup>
+            <optgroup label="Zahlen & Datum">
+              <option value="number">Zahl</option>
+              <option value="date">Datum</option>
+              <option value="time">Uhrzeit</option>
+              <option value="datetime">Datum &amp; Uhrzeit</option>
+              <option value="price">Preis</option>
+              <option value="range">Schieberegler</option>
+            </optgroup>
+            <optgroup label="Kontaktdaten">
+              <option value="contacts">Kontakte</option>
+              <option value="address">Adresse</option>
+              <option value="url">Webseite</option>
+              <option value="email">E-Mail-Adresse</option>
+              <option value="tel">Telefonnummer</option>
+            </optgroup>
+            <optgroup label="Weitere Feldtypen">
+              <option value="file">Dateiupload</option>
+            </optgroup>
+          </select>
+          <input type="button" id="addInput" value="Feld hinzufügen"></fieldset>
+      </div>
+    </form>
+  </section>
+  {{/with}}
+</template>
+
+<template name="editLibraryFormField">
+  <div class="fieldContainer">
+    <a class="remove" data-icon="d">{{type}}</a>
+    {{{field}}}
+    <input type="checkbox" name="required" id="required" {{#if required}}checked{{/if}}> Pflichtfeld?
+
+  </div>
+</template>

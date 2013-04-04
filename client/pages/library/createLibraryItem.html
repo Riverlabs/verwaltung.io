@@ -1,5 +1,5 @@
 <template name="createLibraryItem">
-  <aside class="stepsSidebar">
+{{!   <aside class="stepsSidebar">
     <h1>Neues Protokoll</h1>
     <h3>Protokolle werden zu jeder Sitzung angefertigt und an alle Mitglieder gesendet.</h3>
     <ul class="steps">
@@ -7,8 +7,31 @@
       <li class="active">Inhalte</li>
       <li>Speichern &amp; Teilen</li>
     </ul>
-  </aside>
+  </aside> }}
+  {{#with library}}
   <section class="content flex">
-    Create
+    <form class="flexContainer flexColumn">
+      <footer class="submitContainer topContainer flexContainer">
+        <a href="{{libraryPath}}">‹ Zurück zur Bibliothek</a>
+        <div class="flex"></div>
+        <input type="submit" value="Eintrag hinzufügen">
+      </footer>
+      {{>message}}
+      <div class="inner flex">
+        <h1>Eintrag hinzufügen</h1>
+        <fieldset>
+          {{#each fields}}
+            {{>createLibraryItemField}}
+          {{else}}
+            Bisher gibt es keine Felder in diesem Formular. Legen Sie jetzt das erste Feld an.
+          {{/each}}
+        </fieldset>
+      </div>
+    </form>
   </section>
+  {{/with}}
+</template>
+
+<template name="createLibraryItemField">
+  {{{field}}}
 </template>

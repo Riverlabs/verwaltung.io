@@ -1,14 +1,36 @@
 <template name="editLibrary">
-  <aside class="stepsSidebar">
-    <h1>Bibliothek bearbeiten</h1>
-    <h3>Protokolle werden zu jeder Sitzung angefertigt und an alle Mitglieder gesendet.</h3>
-    <ul class="steps">
-      <li class="done">Datum &amp; Teilnehmer</li>
-      <li class="active">Inhalte</li>
-      <li>Speichern &amp; Teilen</li>
-    </ul>
-  </aside>
+  {{#with library}}
   <section class="content flex">
-    Edit Library
+    <form class="flexContainer flexColumn">
+      <div class="submitContainer topContainer flexContainer">
+        <a href="{{libraryPath}}">‹ Zurück zur Bibliothek</a>
+        <div class="flex"></div>
+        <input type="submit" value="Änderungen speichern">
+      </div>
+      {{>message}}
+      <div class="inner flex">
+        <h1>Bibliothek bearbeiten</h1>
+        <h3>Diese Bibliothek wurde <abbr title="{{created}}">{{created}}</abbr> erstellt.</h3>
+        <fieldset>
+          <div class="fieldContainer">
+            <label for="title">Bezeichnung</label>
+            <input type="text" name="title" id="title" value="{{title}}" autofocus>
+          </div>
+          <div class="fieldContainer">
+            <label for="summary">Zusammenfassung</label>
+            <textarea name="summary" id="summary">{{summary}}</textarea>
+          </div>
+        </fieldset>
+        <fieldset>
+          <h2>Bibliothek löschen</h2>
+          <a href="{{removeLibraryPath}}">Diese Bibliothek und alle Einträge unwiderruflich löschen!</a>
+        </fieldset>
+        <fieldset>
+          <h2>Möchten Sie das Formular für diese Bibliothek anpassen?</h2>
+          <p>Hier haben Sie die Möglichkeit dazu: <a href="{{editLibraryFormPath}}">Formular bearbeiten</a></p>
+        </fieldset>
+      </div>
+    </form>
   </section>
+  {{/with}}
 </template>
