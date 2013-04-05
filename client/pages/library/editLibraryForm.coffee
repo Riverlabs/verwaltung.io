@@ -3,6 +3,11 @@ _.extend Template.editLibraryForm,
     Libraries.findOne(Meteor.router.pages().invocation().library)
   fields: () ->
     Fields.find (library: @_id), (sort: created: 1)
+  fieldTypeGroups: () ->
+    FIELDTYPES
+  available: () ->
+    Template["#{@type}FieldEdit"] isnt undefined
+
   events: 
     'click #addInput': () ->
       Fields.insert 

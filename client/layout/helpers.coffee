@@ -1,4 +1,4 @@
-Handlebars.registerHelper 'formatNumber', (number, format) ->
+Handlebars.registerHelper 'formatNumber', (number = 0, format) ->
   $.format.locale
     number: 
       format: '#,##0.####'
@@ -8,5 +8,5 @@ Handlebars.registerHelper 'formatNumber', (number, format) ->
 
 Handlebars.registerHelper 'pluralize', (singular, plural, zero, count) ->
   return "#{singular}" if count is 1
-  return "#{count} #{plural}" if count > 1
+  return "#{count} #{plural}" if count > 0
   return "#{zero}"

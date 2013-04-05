@@ -1,0 +1,11 @@
+<template name="priceField">
+  <input type="number" name="{{_id}}" id="{{_id}}" value="{{default}}" step="0.01"> €
+</template>
+
+<template name="priceFieldTable">
+  {{formatNumber value '#,##0.00'}} €
+</template>
+
+<template name="priceFieldEdit">
+  <input type="number" name="default" id="default" class="default" value="{{default}}" placeholder="Standardwert" step="0.01"> €
+</template>

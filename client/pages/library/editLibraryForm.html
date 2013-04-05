@@ -20,34 +20,13 @@
         </fieldset>
         <fieldset>
           <select id="addInputType">
-            <optgroup label="Text">
-              <option value="text" selected>Textfeld (einzelig)</option>
-              <option value="textarea">Textbereich (mehrzeilig)</option>
+            {{#each fieldTypeGroups}}
+            <optgroup label="{{label}}">
+              {{#each fieldTypes}}
+              <option value="{{type}}" {{#unless available}}disabled{{/unless}}> {{label}}</option>
+              {{/each}}
             </optgroup>
-            <optgroup label="Auswahl">
-              <option value="multiselect">Auswahl</option>
-              <option value="select">Mehrfachauswahl</option>
-              <option value="tags">Stichworte (autom. Vervollständigung)</option>
-              <option value="color">Farbe</option>
-            </optgroup>
-            <optgroup label="Zahlen & Datum">
-              <option value="number">Zahl</option>
-              <option value="date">Datum</option>
-              <option value="time">Uhrzeit</option>
-              <option value="datetime">Datum &amp; Uhrzeit</option>
-              <option value="price">Preis</option>
-              <option value="range">Schieberegler</option>
-            </optgroup>
-            <optgroup label="Kontaktdaten">
-              <option value="contacts">Kontakte</option>
-              <option value="address">Adresse</option>
-              <option value="url">Webseite</option>
-              <option value="email">E-Mail-Adresse</option>
-              <option value="tel">Telefonnummer</option>
-            </optgroup>
-            <optgroup label="Weitere Feldtypen">
-              <option value="file">Dateiupload</option>
-            </optgroup>
+            {{/each}}
           </select>
           <input type="button" id="addInput" value="Feld hinzufügen"></fieldset>
       </div>
