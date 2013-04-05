@@ -1,34 +1,36 @@
 <template name="library">
   {{#with library}}
-    <section class="content flex inner">
-      <div class="actions topActions">
-        <a href="{{editLibraryPath}}" data-icon="s" class="new">
-          Bibliothek bearbeiten
-        </a>
-        <a href="{{editLibraryFormPath}}" data-icon="f" class="new">
-          Formular bearbeiten
-        </a>
-        <a href="{{createLibraryItemPath}}" data-icon="n" class="new">
-          Eintrag hinzufügen
-        </a>
-      </div>
-      <h1>{{title}}</h1>
-      {{>message}}
-      <table class="libraryItems">
-        <thead>
-          <tr>
-            {{#each fields}}
-            <th>{{title}}</th>
+    <section class="content flex flexContainer">
+      <div class="flex scrollable fullscreen inner">
+        <div class="actions topActions">
+          <a href="{{editLibraryPath}}" data-icon="s" class="new">
+            Bibliothek bearbeiten
+          </a>
+          <a href="{{editLibraryFormPath}}" data-icon="f" class="new">
+            Formular bearbeiten
+          </a>
+          <a href="{{createLibraryItemPath}}" data-icon="n" class="new">
+            Eintrag hinzufügen
+          </a>
+        </div>
+        <h1>{{#if title}}{{title}}{{else}}Bibliothek{{/if}}</h1>
+        {{>message}}
+        <table class="libraryItems">
+          <thead>
+            <tr>
+              {{#each fields}}
+              <th>{{title}}</th>
+              {{/each}}
+              <th class="actions">Aktionen</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each items}}
+              {{>libraryTableItem}}
             {{/each}}
-            <th class="actions">Aktionen</th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each items}}
-            {{>libraryTableItem}}
-          {{/each}}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </section>
   {{/with}}
 </template>
@@ -36,7 +38,7 @@
 <template name="libraryTableItem">
   <tr>
     {{#each values}}
-    <td>{{value}}</td>
+    <td>{{{field}}}</td>
     {{/each}}
     <td class="actions"><a href="{{editLibraryItemPath}}" data-icon="e" title="Bearbeiten"></a> <a href="{{removeLibraryItemPath}}" data-icon="d" title="Löschen"></a></td>
   </tr>

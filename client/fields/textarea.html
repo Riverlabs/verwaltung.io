@@ -1,0 +1,11 @@
+<template name="textareaField">
+  <textarea name="{{_id}}" id="{{_id}}" class="ckeditor">{{default}}</textarea>
+</template>
+
+<template name="textareaFieldTable">
+  {{{pluralize 'Ein Wort' 'Worte' '<span class="empty">Kein Inhalt</span>' count}}}
+</template>
+
+<template name="textareaFieldEdit">
+  <textarea name="default" id="default" placeholder="Standardwert">{{default}}</textarea>
+</template>

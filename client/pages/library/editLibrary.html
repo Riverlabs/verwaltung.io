@@ -1,6 +1,6 @@
 <template name="editLibrary">
   {{#with library}}
-  <section class="content flex">
+  <section class="content flex flexContainer">
     <form class="flexContainer flexColumn">
       <div class="submitContainer topContainer flexContainer">
         <a href="{{libraryPath}}">‹ Zurück zur Bibliothek</a>
@@ -8,7 +8,7 @@
         <input type="submit" value="Änderungen speichern">
       </div>
       {{>message}}
-      <div class="inner flex">
+      <div class="inner flex scrollable">
         <h1>Bibliothek bearbeiten</h1>
         <h3>Diese Bibliothek wurde <abbr title="{{created}}">{{created}}</abbr> erstellt.</h3>
         <fieldset>

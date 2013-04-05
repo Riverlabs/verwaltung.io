@@ -1,6 +1,6 @@
 <template name="editLibraryForm">
   {{#with library}}
-  <section class="content flex">
+  <section class="content flex flexContainer">
     <form class="flexContainer flexColumn">
       <footer class="submitContainer topContainer flexContainer">
         <a href="{{libraryPath}}">‹ Zurück zur Bibliothek</a>
@@ -9,7 +9,7 @@
 {{!         <input type="submit" value="Änderungen speichern"> }}
       </footer>
       {{>message}}
-      <div class="inner flex">
+      <div class="inner flex scrollable">
         <h1>Formular bearbeiten</h1>
         <fieldset>
           {{#each fields}}
@@ -59,8 +59,9 @@
 <template name="editLibraryFormField">
   <div class="fieldContainer">
     <a class="remove" data-icon="d">{{type}}</a>
+    <input type="text" name="title" id="title" class="title" value="{{title}}" placeholder="Titel" autocomplete="off">
+    <input type="text" name="description" id="description"  class="description" value="{{description}}" placeholder="Beschreibung" autocomplete="off">
     {{{field}}}
     <input type="checkbox" name="required" id="required" {{#if required}}checked{{/if}}> Pflichtfeld?
-
   </div>
 </template>

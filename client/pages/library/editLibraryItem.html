@@ -1,6 +1,7 @@
 <template name="editLibraryItem">
+  {{!  TODO: edit & create zusammenführen }}
   {{#with library}}
-  <section class="content flex">
+  <section class="content flex flexContainer">
     <form class="flexContainer flexColumn">
       <footer class="submitContainer topContainer flexContainer">
         <a href="{{libraryPath}}">‹ Zurück zur Bibliothek</a>
@@ -8,7 +9,7 @@
         <input type="submit" value="Eintrag speichern">
       </footer>
       {{>message}}
-      <div class="inner flex">
+      <div class="inner flex scrollable">
         <h1>Eintrag bearbeiten</h1>
         <fieldset>
           {{#each fields}}
@@ -24,5 +25,9 @@
 </template>
 
 <template name="editLibraryItemField">
+  <label for="{{_id}}">
+    {{title}}
+    <small>{{description}}</small>
+  </label>
   {{{field}}}
 </template>

@@ -21,4 +21,4 @@ _.extend Template.editLibraryItemField,
     if Template["#{@type}Field"]
       Template["#{@type}Field"](@)
     else
-      Template.textFieldEdit(@)
+      Template.textField(@)

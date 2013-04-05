@@ -9,7 +9,7 @@
     </ul>
   </aside> }}
   {{#with library}}
-  <section class="content flex">
+  <section class="content flex flexContainer">
     <form class="flexContainer flexColumn">
       <footer class="submitContainer topContainer flexContainer">
         <a href="{{libraryPath}}">‹ Zurück zur Bibliothek</a>
@@ -17,7 +17,7 @@
         <input type="submit" value="Eintrag hinzufügen">
       </footer>
       {{>message}}
-      <div class="inner flex">
+      <div class="inner flex scrollable">
         <h1>Eintrag hinzufügen</h1>
         <fieldset>
           {{#each fields}}
@@ -33,5 +33,9 @@
 </template>
 
 <template name="createLibraryItemField">
+  <label for="{{_id}}">
+    {{title}}
+    <small>{{description}}</small>
+  </label>
   {{{field}}}
 </template>
