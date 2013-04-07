@@ -1,17 +1,46 @@
 <template name="helpHistory">
   <section class="content flex flexContainer">
-    <div class="flex scrollable fullscreen">
+    <div class="flex scrollable fullscreen inner">
       <h1>Versionshinweise</h1>
       {{#each lists}}
-        <h2>{{name}}</h2>
-        {{#each cards}}
-          {{#each labels}}
-            {{name}}: 
+        <h2>{{nameWithoutDate}} <abbr class="date" title="{{date}}">{{date}}</abbr></h2>
+        <ul>
+          {{#each cards}}
+            <li class="flexContainer">
+              <div class="labels">
+                {{#each labels}}
+                  <div class="label {{color}}">{{name}}</div> 
+                {{/each}}
+              </div>
+              <div class="members">
+                {{#each members}}
+                  <img src="https://trello-avatars.s3.amazonaws.com/{{avatarHash}}/30.png" title="{{fullName}}">
+                {{/each}}
+              </div>
+              <div class="details flex">
+                <div class="title">
+                  {{name}}
+                </div>
+                <div class="description">{{#markdown}}{{desc}}{{/markdown}}</div>
+                {{#if attachments}}
+                  <div class="attachments">
+                    {{#each attachments}}
+                      {{#if previews}}
+                        <a href="{{url}}" target="_blank"><img src="{{url}}"></a>
+                      {{else}}
+                        <a href="{{url}}" target="_blank">{{name}}</a>
+                      {{/if}}
+                    {{/each}}
+                  </div>
+                {{/if}}
+              </div>
+            </li>
+          {{else}}
+            <li>Keine Versionshinweise zu dieser Version vorhanden.</li>
           {{/each}}
-          <b>{{name}}</b> – {{desc}}<br><br>
-        {{else}}
-        {{/each}}
+        </ul>
       {{else}}
+        <h2>Versionshinweise werden geladen...</h2>
       {{/each}}
     </div>
   </section>

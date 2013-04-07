@@ -1,18 +1,33 @@
 HelpHistoryCards = {}
 HelpHistoryLists = {}
+HelpHistoryMembers = {}
 
 fetchTrello = () ->
   Meteor.http.get 'https://api.trello.com/1/boards/51503a5e154903b35d0082ba/cards?key=732d5a4c68c7797aedc13a15f0f6dc2a', 
     (error, result) ->
-      HelpHistoryCards = {}
+      _helpHistoryCards = {}
       _.each result?.data, (card) ->
-        HelpHistoryCards[card.id] = card
+        if card.badges.attachments
+          result = Meteor.http.get "https://api.trello.com/1/cards/#{card.id}/attachments?key=732d5a4c68c7797aedc13a15f0f6dc2a"
+          attachments = result?.data
+          card.attachments = attachments
+        _helpHistoryCards[card.id] = card
+      HelpHistoryCards = _helpHistoryCards
 
   Meteor.http.get 'https://api.trello.com/1/boards/51503a5e154903b35d0082ba/lists?filter=all&key=732d5a4c68c7797aedc13a15f0f6dc2a', 
     (error, result) -> 
-      HelpHistoryLists = {}
+      _helpHistoryLists = {}
       _.each result?.data, (list) ->
-        HelpHistoryLists[list.id] = list
+        _helpHistoryLists[list.id] = list
+      HelpHistoryLists = _helpHistoryLists
+  Meteor.http.get 'https://api.trello.com/1/boards/51503a5e154903b35d0082ba/members?key=732d5a4c68c7797aedc13a15f0f6dc2a',
+    (error, result) -> 
+      _members = {}
+      _.each result?.data, (member) ->
+        memberDetails = Meteor.http.get "https://api.trello.com/1/members/#{member.id}?key=732d5a4c68c7797aedc13a15f0f6dc2a"
+        _members[member.id] = memberDetails.data
+      HelpHistoryMembers = _members
+
 
 Meteor.setInterval fetchTrello, 1000*10
 fetchTrello()
@@ -20,7 +35,7 @@ fetchTrello()
 Meteor.publish 'helpHistory', ->
   _helpHistory = {}
   _interval= Meteor.setInterval () =>
-    HelpHistory = _.extend HelpHistoryCards, HelpHistoryLists
+    HelpHistory = _.extend HelpHistoryCards, HelpHistoryLists, HelpHistoryMembers
     _.each HelpHistory, (item) =>
       if _helpHistory[item.id] and not _.isEqual _helpHistory[item.id], item
         _helpHistory[item.id] = item
