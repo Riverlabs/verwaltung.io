@@ -19,7 +19,9 @@ _.extend Template.helpHistory,
       name: /Version */i
     , sort: name: -1
   cards: () ->
-    HelpHistory.find(idList: @_id)
+    HelpHistory.find
+      idList: @_id
+    , sort: pos: 1
   # attachmentPreview: () ->
   #   preview = _.where @previews, height: 320
   #   console.log preview[0].url

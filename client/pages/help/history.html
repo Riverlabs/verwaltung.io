@@ -3,42 +3,52 @@
     <div class="flex scrollable fullscreen inner">
       <h1>Versionshinweise <div class="currentVersion">Aktuelle Version: {{currentVersion}}</div></h1>
       {{#each lists}}
-        <h2>{{nameWithoutDate}} <abbr class="date" title="{{date}}">{{date}}</abbr></h2>
-        <ul class="cards">
-          {{#each cards}}
-            <li class="flexContainer">
-              <div class="labels">
-                {{#each labels}}
-                  <div class="label {{color}}">{{name}}</div> 
-                {{/each}}
-              </div>
-              <div class="members">
-                {{#each members}}
-                  <img src="https://trello-avatars.s3.amazonaws.com/{{avatarHash}}/30.png" title="{{fullName}}">
-                {{/each}}
-              </div>
-              <div class="details flex">
-                <div class="title">
-                  {{name}}
+        <div class="list {{#unless closed}}active{{/unless}}">
+          <h2>{{nameWithoutDate}} <abbr class="date" title="{{date}}">{{date}}</abbr></h2>
+          <ul class="cards">
+            {{#each cards}}
+              <li class="flexContainer">
+                <div class="labels">
+                  {{#each labels}}
+                    <div class="label {{color}}">{{name}}</div> 
+                  {{/each}}
                 </div>
-                <div class="description">{{#markdown}}{{desc}}{{/markdown}}</div>
-                {{#if attachments}}
-                  <div class="attachments">
-                    {{#each attachments}}
-                      {{#if previews}}
-                        <a href="{{url}}" target="_blank"><img src="{{url}}"></a>
-                      {{else}}
-                        <a href="{{url}}" target="_blank">{{name}}</a>
-                      {{/if}}
-                    {{/each}}
+                <div class="members">
+                  {{#each members}}
+                    <img src="https://trello-avatars.s3.amazonaws.com/{{avatarHash}}/30.png" title="{{fullName}}">
+                  {{/each}}
+                </div>
+                <div class="details flex">
+                  <div class="title">
+                    {{name}} 
+                    {{#if due}}
+                    <span class="date">
+                      Fertigstellung 
+                      <abbr title="{{due}}">
+                        {{due}}
+                      </abbr>
+                    </span>
+                    {{/if}}
                   </div>
-                {{/if}}
-              </div>
-            </li>
-          {{else}}
-            <li>Keine Versionshinweise zu dieser Version vorhanden.</li>
-          {{/each}}
-        </ul>
+                  <div class="description">{{#markdown}}{{desc}}{{/markdown}}</div>
+                  {{#if attachments}}
+                    <div class="attachments">
+                      {{#each attachments}}
+                        {{#if previews}}
+                          <a href="{{url}}" target="_blank"><img src="{{url}}"></a>
+                        {{else}}
+                          <a href="{{url}}" target="_blank">{{name}}</a>
+                        {{/if}}
+                      {{/each}}
+                    </div>
+                  {{/if}}
+                </div>
+              </li>
+            {{else}}
+              <li>Keine Versionshinweise zu dieser Version vorhanden.</li>
+            {{/each}}
+          </ul>
+        </div>
       {{else}}
         <h2>Versionshinweise werden geladen...</h2>
       {{/each}}

@@ -12,14 +12,14 @@ Handlebars.registerHelper 'pluralize', (singular, plural, zero, count) ->
   return "#{zero}"
 
 class Version
-  constructor: (major='0.0.0', minor, patch) ->
-    if _.isString major
-      version = major.split('.')
+  constructor: (version='0.0.0', @closed) ->
+    if _.isString version
+      version = version.split('.')
       @major = parseInt(version[0])
       @minor = parseInt(version[1])
       @patch = parseInt(version[2])
-    else if _.isObject major
-      _.extend @, major
+    else if _.isObject version
+      _.extend @, version
   toString: () ->
     "#{@major}.#{@minor}.#{@patch}"
 
@@ -27,7 +27,8 @@ class Version
 #   Session.get 'versions'
 
 Handlebars.registerHelper 'currentVersion', () ->
-  new Version Session.get('versions')[0]
+  versions = _.where Session.get('versions'), closed: true
+  new Version versions[0]
 
 Meteor.autorun () ->
   versions = HelpHistory.find
@@ -37,7 +38,7 @@ Meteor.autorun () ->
   .fetch()
   versions = _.map versions, (version) ->
     match = /[\.0-9]+/.exec version.name
-    return new Version match[0]
+    return new Version match[0], version.closed
   sortedVersions = versions.sort (a, b) ->
     a = a.major*100000 + a.minor*1000 + a.patch
     b = b.major*100000 + b.minor*1000 + b.patch

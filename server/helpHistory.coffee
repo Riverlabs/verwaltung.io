@@ -3,7 +3,7 @@ HelpHistoryLists = {}
 HelpHistoryMembers = {}
 
 fetchTrello = () ->
-  Meteor.http.get 'https://api.trello.com/1/boards/51503a5e154903b35d0082ba/cards?key=732d5a4c68c7797aedc13a15f0f6dc2a', 
+  Meteor.http.get 'https://api.trello.com/1/boards/51503a5e154903b35d0082ba/cards?filter=open&key=732d5a4c68c7797aedc13a15f0f6dc2a', 
     (error, result) ->
       _helpHistoryCards = {}
       _.each result?.data, (card) ->
