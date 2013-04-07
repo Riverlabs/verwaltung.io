@@ -1,15 +1,22 @@
 <template name="pageHeader">
+  
   <header id="pageHeader" class="flexContainer">
     <a href="{{dashboardPath}}">
       {{>logo}}
     </a>
     <div class="flex"></div>
+    
     <nav>
+      
       <a href="{{helpPath}}">Hilfe &amp; Kontakt</a>
       <a href="{{helpHistoryPath}}">Versionshinweise</a>
+      {{#if currentUser}}
       <a href="/logout">Abmelden <span class="name">({{currentUser.profile.name}})</span></a>
+      {{/if}}
     </nav>
+    
   </header>
+  
 </template>
 
 <template name="logo">

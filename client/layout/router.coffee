@@ -27,7 +27,7 @@ removeLibraryItem = () ->
   return @stop()
 
 isPublicPage = (page) ->
-  page in ['help']
+  page in ['help', 'helpHistory']
 isAuthenticationPage = (page) ->
   page in ['login', 'register', 'welcome']
 logout = () ->

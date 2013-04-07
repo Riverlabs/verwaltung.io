@@ -1,4 +1,5 @@
 <template name="navigation">
+  {{#if currentUser}}
   <nav id="navigation" class="flexContainer flexColumn">
     <div class="flex flexContainer flexColumn scrollable ">
       {{#each libraries}}
@@ -9,4 +10,5 @@
       <a href="{{createLibraryPath}}" data-icon="a" class="new">Neue Bibliothek</a>
     </div>
   </nav>
+  {{/if}}
 </template>

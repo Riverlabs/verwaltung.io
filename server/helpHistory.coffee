@@ -14,6 +14,7 @@ fetchTrello = () ->
         _helpHistoryCards[card.id] = card
       HelpHistoryCards = _helpHistoryCards
 
+  # TODO: Include all cards in one request: &cards=open
   Meteor.http.get 'https://api.trello.com/1/boards/51503a5e154903b35d0082ba/lists?filter=all&key=732d5a4c68c7797aedc13a15f0f6dc2a', 
     (error, result) -> 
       _helpHistoryLists = {}
