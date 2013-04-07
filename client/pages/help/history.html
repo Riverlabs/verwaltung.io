@@ -2,7 +2,15 @@
   <section class="content flex flexContainer">
     <div class="flex scrollable fullscreen">
       <h1>Versionshinweise</h1>
-      {{#each history}}
+      {{#each lists}}
+        <h2>{{name}}</h2>
+        {{#each cards}}
+          {{#each labels}}
+            {{name}}: 
+          {{/each}}
+          <b>{{name}}</b> – {{desc}}<br><br>
+        {{else}}
+        {{/each}}
       {{else}}
       {{/each}}
     </div>

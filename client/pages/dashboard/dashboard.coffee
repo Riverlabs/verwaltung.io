@@ -1,3 +1,3 @@
 _.extend Template.dashboard,
   rendered: () ->
-    console.log 'test'
+    console.log 'Dashboard rendered'
