@@ -38,6 +38,8 @@ logout = () ->
 
 Meteor.pages
   '/': to: 'dashboard'
+  '/help': to: 'help'
+  '/help/history': to: 'helpHistory'
   '/register': to: 'register', layout: 'framelessLayout'
   '/login': to: 'login', layout: 'framelessLayout'
   '/logout': logout
