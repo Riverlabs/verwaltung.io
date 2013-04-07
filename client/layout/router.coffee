@@ -3,6 +3,7 @@ setLibrary = () ->
 
 setLibraryItem = () ->
   @set 'libraryItem', @params._id
+  @set 'library', LibraryItems.findOne(@params._id).library
 
 createLibrary = () ->
   library = Libraries.insert created: new Date()
