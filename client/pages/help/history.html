@@ -1,9 +1,18 @@
 <template name="helpHistory">
   <section class="content flex flexContainer">
     <div class="flex scrollable fullscreen inner">
-      <h1>Versionshinweise <div class="currentVersion">Aktuelle Version: {{currentVersion}}</div></h1>
+      {{#if session 'helpHistoryFutureVisible'}}
+        <button class="future active" data-icon="r">Zukünftige Versionen ausblenden ...</button>
+      {{else}}
+        <button class="future" data-icon="r">Zukünftige Versionen anzeigen ...</button>
+      {{/if}}
+      <h1>
+        Versionshinweise 
+        <div class="currentVersion">Aktuelle Version: {{currentVersion}}</div>
+      </h1>
+
       {{#each lists}}
-        <div class="list {{#unless closed}}active{{/unless}}">
+        <div class="list {{#unless closed}}active{{/unless}} {{#if session 'helpHistoryFutureVisible'}}show{{/if}}">
           <h2>{{nameWithoutDate}} <abbr class="date" title="{{date}}">{{date}}</abbr></h2>
           <ul class="cards">
             {{#each cards}}

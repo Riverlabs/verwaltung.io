@@ -3,7 +3,9 @@ Meteor.autorun ->
   window.helpHistoryHandler = Meteor.subscribe "helpHistory"
 
 _.extend Template.helpHistory,
-  rendered: () -> $('abbr').timeago()
+  rendered: () -> 
+    $('abbr').timeago()
+
   nameWithoutDate: () ->
     @name.replace /\((.*)\)/, ''
   date: () ->
@@ -22,6 +24,12 @@ _.extend Template.helpHistory,
     HelpHistory.find
       idList: @_id
     , sort: pos: 1
+  events:
+    'click .future': () ->
+      if Session.get 'helpHistoryFutureVisible'
+        Session.set 'helpHistoryFutureVisible', undefined
+      else
+        Session.set 'helpHistoryFutureVisible', true
   # attachmentPreview: () ->
   #   preview = _.where @previews, height: 320
   #   console.log preview[0].url

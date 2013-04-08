@@ -3,7 +3,14 @@
     .currentVersion
       color rgba(#000, 0.5)
       font-size 13px
-
+  .future
+    float right
+    padding-top 9px
+    padding-bottom 7px
+    &.active
+      background rgba(#000, 0.25)
+    &:before
+      font-size 25px
   .list
     h2
       border-bottom 1px solid rgba(#000, 0.1)
@@ -75,6 +82,13 @@
           border 1px solid rgba(#000, 0.1)
           box-sizing border-box
     &.active
-      opacity 0.5
-      .date
-        color rgba(#000, 0.5) !important
+      opacity 0.8
+      display none
+      width 100% !important
+      background rgba(#000, 0.015)
+      border 1px dashed rgba(#000, 0.15)
+      padding 25px !important
+      margin 15px 0 !important
+      box-sizing border-box
+      &.show
+        display block
