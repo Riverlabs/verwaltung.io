@@ -1,11 +1,13 @@
 Libraries = new Meteor.Collection 'libraries'
 Libraries.allow
   insert: (userId, doc) ->
+    doc.createdBy = userId
+    doc.createdOn = new Date()
     true
   update: (userId, doc, fieldNames, modifier) ->
-    true
+    doc.createdBy is userId
   remove: (userId, doc) ->
-    true
+    doc.createdBy is userId
 
 LibraryItems = new Meteor.Collection 'libraryitems'
 LibraryItems.allow
@@ -29,7 +31,7 @@ Fields.allow
 
 if Meteor.isServer
   Meteor.publish 'libraries', () ->
-    Libraries.find()
+    Libraries.find(createdBy: @userId)
   Meteor.publish 'libraryitems', () ->
     LibraryItems.find()
   Meteor.publish 'fields', () ->

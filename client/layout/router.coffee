@@ -6,7 +6,7 @@ setLibraryItem = () ->
   @set 'library', LibraryItems.findOne(@params._id).library
 
 createLibrary = () ->
-  library = Libraries.insert created: new Date()
+  library = Libraries.insert({})
   Meteor.go Meteor.editLibraryPath({_id: library})
   return @stop()
 removeLibrary = () ->
