@@ -1,5 +1,5 @@
 <template name="numberField">
-  <input type="number" name="{{_id}}" id="{{_id}}" value="{{default}}">
+  <input type="number" name="{{_id}}" id="{{_id}}" value="{{value}}">
 </template>
 
 <template name="numberFieldTable">
@@ -7,6 +7,6 @@
 </template>
 
 <template name="numberFieldEdit">
-  <input type="number" name="default" id="default" class="default" value="{{default}}" placeholder="Standardwert">
-  <input type="text" name="format" id="format" class="format" value="{{format}}" placeholder="Formatierung (z.B. #,##0.00#)">
+  <input type="number" name="value" value="{{value}}" placeholder="Standardwert">
+  <input type="text" name="format" value="{{format}}" placeholder="Formatierung (z.B. #,##0.00#)">
 </template>

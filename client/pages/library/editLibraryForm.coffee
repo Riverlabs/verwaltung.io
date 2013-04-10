@@ -2,7 +2,7 @@ _.extend Template.editLibraryForm,
   library: () ->
     Libraries.findOne(Meteor.router.pages().invocation().library)
   fields: () ->
-    Fields.find (library: @_id), (sort: created: 1)
+    Fields.find (library: @_id), (sort: createdAt: 1)
   fieldTypeGroups: () ->
     FIELDTYPES
   available: () ->

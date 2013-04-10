@@ -6,6 +6,15 @@ Handlebars.registerHelper 'formatNumber', (number = 0, format) ->
       decimalSeparator: ','
   $.format.number parseFloat(number), format
 
+Handlebars.registerHelper 'formatFileSize', (filesize = 0) ->
+  suffix = ["Bytes", "KB", "MB", "GB", "TB", "PB"]
+  tier = 0
+  while filesize >= 1024
+    filesize = filesize / 1024
+    tier++
+  filesize = Math.round(filesize * 10) / 10
+  return "#{filesize} #{suffix[tier]}"
+
 Handlebars.registerHelper 'pluralize', (singular, plural, zero, count) ->
   return "#{singular}" if count is 1
   return "#{count} #{plural}" if count > 0

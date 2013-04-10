@@ -21,6 +21,9 @@ FIELDTYPES = [
   ,
     label: 'Farbe'
     type: 'color'
+  ,
+    label: 'Verknüpfung'
+    type: 'connection'
   ]
 , 
   label: 'Zahlen & Datum'

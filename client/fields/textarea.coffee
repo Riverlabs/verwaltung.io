@@ -2,7 +2,6 @@ replaceTextareaWithEditor = () ->
   CKEDITOR.replace @find('textarea')
 
 Template.textareaField.rendered = Template.textareaFieldEdit.rendered = replaceTextareaWithEditor
-  
 
 Template.textareaFieldTable.count = () ->
   if @value

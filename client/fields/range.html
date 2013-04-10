@@ -1,6 +1,6 @@
 <template name="rangeField">
-  {{min}}<input type="range" name="{{_id}}" id="{{_id}}" value="{{default}}" min="{{min}}" max="{{max}}" step="{{step}}" class="range">{{max}} | 
-  Aktuell: <span class="target">{{default}}</span>
+  {{min}}<input type="range" name="{{_id}}" id="{{_id}}" value="{{value}}" min="{{min}}" max="{{max}}" step="{{step}}" class="range">{{max}} | 
+  Aktuell: <span class="target">{{value}}</span>
 </template>
 
 <template name="rangeFieldTable">
@@ -8,10 +8,10 @@
 </template>
 
 <template name="rangeFieldEdit">
-  <input type="range" name="default" id="default" value="{{default}}" min="{{min}}" max="{{max}}" step="{{step}}">
-  <input type="number" name="min" id="min" value="{{min}}" placeholder="Mindestwert: 0">
-  <input type="number" name="max" id="max" value="{{max}}" placeholder="Maximalwert: 100">
-  <input type="number" name="step" id="step" value="{{step}}" placeholder="Schritt: 1">
-  <input type="text" value="{{default}}" disabled>
+  <input type="range" name="value" value="{{value}}" min="{{min}}" max="{{max}}" step="{{step}}">
+  <input type="number" name="min" value="{{min}}" placeholder="Mindestwert: 0">
+  <input type="number" name="max" value="{{max}}" placeholder="Maximalwert: 100">
+  <input type="number" name="step" value="{{step}}" placeholder="Schritt: 1">
+  <input type="text" value="{{value}}" disabled>
   <input type="checkbox" name="showMeter" id="showMeter" {{#if showMeter}}checked{{/if}}> Fortschrittsbalken in Tabelle anzeigen?
 </template>

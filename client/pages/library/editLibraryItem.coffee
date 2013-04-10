@@ -6,18 +6,19 @@ _.extend Template.editLibraryItem,
   fields: () ->
     Fields.find (library: @_id), (sort: created: 1)
   events: 
-    'submit form': (event) ->
-      event.preventDefault()
-      console.log $('form').toObject()
+    'keyup input, change input, keyup textarea, change textarea': (event) ->
+      fields = {}
+      _.each $('form').toObject(skipEmpty: false), (value, key) ->
+        fields["fields.#{key}"] = value
       LibraryItems.update Meteor.router.pages().invocation().libraryItem,
-        $set: fields: $('form').toObject()
-      , () ->
-        Session.set 'message', type: 'success', text: 'Ihr Eintrag wurde erfolgreich bearbeitet.'
-        Meteor.go Meteor.libraryPath(_id: LibraryItems.findOne(Meteor.router.pages().invocation().libraryItem).library)
+        $set: fields
 
 _.extend Template.editLibraryItemField, 
   field: () ->
-    @default = LibraryItems.findOne(Meteor.router.pages().invocation().libraryItem)?.fields[@_id]
+    libraryItem = LibraryItems.findOne(Meteor.router.pages().invocation().libraryItem)
+    libraryItemValue = libraryItem?.fields?[@_id]
+    # if libraryItemValue isnt undefined
+    @value = libraryItemValue
     if Template["#{@type}Field"]
       Template["#{@type}Field"](@)
     else

@@ -1,0 +1,18 @@
+<template name="fileField">
+  <input type="filepicker" data-fp-apikey="AEcsbLk3nR3SymrW981tOz" data-fp-container="modal" data-fp-services="COMPUTER,DROPBOX,FACEBOOK,URL,FTP" data-fp-button-text="Datei auswählen ..." data-fp-button-class="button">
+  {{#if value}}<span class="uploadUrl"><a href="{{value.url}}+{{value.filename}}" target="_blank">{{value.filename}}</a> <i>({{value.mimetype}}, {{formatFileSize value.size}})</i> <button class="delete">Entfernen</button></span>{{/if}}
+</template>
+
+<template name="fileFieldTable">
+  {{value.filename}}
+</template>
+
+<template name="fileFieldEdit">
+  <input type="filepicker" data-fp-apikey="AEcsbLk3nR3SymrW981tOz" data-fp-container="modal" data-fp-services="COMPUTER,DROPBOX,FACEBOOK,URL,FTP" data-fp-button-text="Datei auswählen ..." data-fp-button-class="button">
+  {{#if value}}<span class="uploadUrl"><a href="{{value.url}}+{{value.filename}}" target="_blank">{{value.filename}}</a> <i>({{value.mimetype}}, {{formatFileSize value.size}})</i> <button class="delete">Entfernen</button></span>{{/if}}
+</template>
+
+
+
+
+

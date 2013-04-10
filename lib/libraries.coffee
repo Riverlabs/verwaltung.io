@@ -2,7 +2,7 @@ Libraries = new Meteor.Collection 'libraries'
 Libraries.allow
   insert: (userId, doc) ->
     doc.createdBy = userId
-    doc.createdOn = new Date()
+    doc.createdAt = new Date()
     true
   update: (userId, doc, fieldNames, modifier) ->
     doc.createdBy is userId
@@ -12,6 +12,7 @@ Libraries.allow
 LibraryItems = new Meteor.Collection 'libraryitems'
 LibraryItems.allow
   insert: (userId, doc) ->
+    doc.createdAt = new Date()
     true
   update: (userId, doc, fieldNames, modifier) ->
     true
@@ -22,6 +23,7 @@ LibraryItems.allow
 Fields = new Meteor.Collection 'fields'
 Fields.allow
   insert: (userId, doc) ->
+    doc.createdAt = new Date()
     true
   update: (userId, doc, fieldNames, modifier) ->
     true

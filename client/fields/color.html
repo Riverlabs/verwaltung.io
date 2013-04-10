@@ -1,5 +1,5 @@
 <template name="colorField">
-  <input type="color" name="{{_id}}" id="{{_id}}" value="{{default}}">
+  <input type="color" name="{{_id}}" id="{{_id}}" value="{{value}}">
 </template>
 
 <template name="colorFieldTable">
@@ -7,6 +7,6 @@
 </template>
 
 <template name="colorFieldEdit">
-  <input type="color" name="default" id="default"  class="default" value="{{default}}">
+  <input type="color" name="value" value="{{value}}">
   <input type="checkbox" name="showHex" id="showHex" {{#if showHex}}checked{{/if}}> HEX-Wert in Tabelle anzeigen?
 </template>
