@@ -1,0 +1,19 @@
+<template name="addressField">
+  <input type="text" name="{{_id}}.street" value="{{value.street}}" placeholder="Straße">
+  <input type="text" name="{{_id}}.city" value="{{value.city}}" placeholder="Stadt">
+  <input type="text" name="{{_id}}.zip" value="{{value.zip}}" placeholder="Postleitzahl">
+  <input type="text" name="{{_id}}.state" value="{{value.state}}" placeholder="Bundesland">
+  <input type="text" name="{{_id}}.country" value="{{value.country}}" placeholder="Land">
+</template>
+
+<template name="addressFieldTable">
+  {{value.street}}, {{value.zip}} {{value.city}}, {{value.state}}, {{value.country}}
+</template>
+
+<template name="addressFieldEdit">
+  <input type="text" name="value.street" value="{{value.street}}" placeholder="Straße">
+  <input type="text" name="value.city" value="{{value.city}}" placeholder="Stadt">
+  <input type="text" name="value.zip" value="{{value.zip}}" placeholder="Postleitzahl">
+  <input type="text" name="value.state" value="{{value.state}}" placeholder="Bundesland">
+  <input type="text" name="value.country" value="{{value.country}}" placeholder="Land">
+</template>
