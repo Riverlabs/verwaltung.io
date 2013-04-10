@@ -8,3 +8,8 @@
 #   definition.noun = result[2]?.p if result
 #   return definition if result   
 # console.log getSingular(searchString)
+
+Meteor.methods
+  'updateOption': (option, title) ->
+    #TODO: Check permissions
+    Fields.update (options: option), $set: 'options.$.title': title

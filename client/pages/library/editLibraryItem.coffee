@@ -6,7 +6,7 @@ _.extend Template.editLibraryItem,
   fields: () ->
     Fields.find (library: @_id), (sort: created: 1)
   events: 
-    'keyup input, change input, keyup textarea, change textarea': (event) ->
+    'keyup input, change input, keyup textarea, change textarea, change select': (event) ->
       fields = {}
       _.each $('form').toObject(skipEmpty: false), (value, key) ->
         fields["fields.#{key}"] = value

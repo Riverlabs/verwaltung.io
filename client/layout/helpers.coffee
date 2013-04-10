@@ -42,6 +42,9 @@ Handlebars.registerHelper 'currentVersion', () ->
 Handlebars.registerHelper 'session', (title) ->
   Session.get title
 
+Handlebars.registerHelper 'equals', (a, b) ->
+  a is b
+
 Meteor.autorun () ->
   versions = HelpHistory.find
     idList: 

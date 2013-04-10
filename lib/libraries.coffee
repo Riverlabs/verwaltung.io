@@ -35,6 +35,8 @@ if Meteor.isServer
   Meteor.publish 'libraries', () ->
     Libraries.find(createdBy: @userId)
   Meteor.publish 'libraryitems', () ->
+    # TODO: Only publish items for current user
     LibraryItems.find()
   Meteor.publish 'fields', () ->
+    # TODO: Only publish fields for current user
     Fields.find()
