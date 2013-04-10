@@ -1,0 +1,11 @@
+<template name="datetimeField">
+  <input type="date" name="{{_id}}.date" value="{{value.date}}"><input type="text" name="{{_id}}.time" value="{{value.time}}" placeholder="00:00">
+</template>
+
+<template name="datetimeFieldTable">
+  {{value.date}} {{value.time}}
+</template>
+
+<template name="datetimeFieldEdit">
+  <input type="date" name="value.date" value="{{value.date}}"><input type="text" name="value.time" value="{{value.time}}" placeholder="00:00">
+</template>
