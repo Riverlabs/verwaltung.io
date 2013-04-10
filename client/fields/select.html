@@ -1,5 +1,5 @@
 <template name="selectField">
-  <select name="{{_id}}" size="5">
+  <select name="{{_id}}">
     {{#each options}}
       <option {{#if equals ../value _id}}selected{{/if}} value="{{_id}}">{{title}}</option>
     {{/each}}
