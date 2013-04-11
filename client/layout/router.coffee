@@ -1,6 +1,9 @@
 setLibrary = () ->
   @set 'library', @params._id
 
+setContact = () ->
+  @set 'contact', Meteor.users.findOne @params._id
+
 setLibraryItem = () ->
   @set 'libraryItem', @params._id
   @set 'library', LibraryItems.findOne(@params._id).library
@@ -64,6 +67,8 @@ Meteor.pages
   '/library/:_id/create': to: 'editLibraryItem', as: 'createLibraryItem', before: [createLibraryItem]
   '/library/item/:_id/edit': to: 'editLibraryItem', before: [setLibraryItem]
   '/library/item/:_id/remove': to: 'library', as: 'removeLibraryItem', before: [removeLibraryItem]
+  '/contacts/:_id': to: 'showContact', before: [setContact]
+  '/contacts/:_id/edit': to: 'editContact', before: [setContact]
   '*': to: 'notFound'
 , defaults:
   layout: 'layout'

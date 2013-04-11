@@ -1,0 +1,23 @@
+<template name="editContact">
+  {{#with page.contact}}
+  <section class="content flex flexContainer">
+    <form class="flexContainer flexColumn">
+      <footer class="submitContainer topContainer flexContainer">
+        <a href="{{showContactPath}}" data-icon="u">Zurück zum Kontakt</a>
+        <div class="flex"></div>
+        <p class="info">Änderungen werden autom. gespeichert.</p>
+      </footer>
+      {{>message}}
+    <div class="inner flex scrollable">
+      <h1><input name="profile.name" value="{{profile.name}}"></h1>
+      <ul>  
+        {{#each emails}}
+          <li>{{address}}</li>
+        {{/each}}
+        <li><small>E-Mail-Adressen lassen sich im Moment nich ändern.</small></li>
+      </ul>
+    </div>
+    </form>
+  </section>
+  {{/with}}
+</template>
