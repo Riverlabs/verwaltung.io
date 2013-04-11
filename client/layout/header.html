@@ -15,6 +15,7 @@
         <div class="dropdown">
           <div class="dropdownToggle" data-icon="t">{{currentUser.profile.name}}</div>
           <div class="dropdownMenu">
+            {{#if currentUser.admin}}<a href="{{adminDashboardPath}}" data-icon="w">Administration</a>{{/if}}
             <a href="/contacts/{{currentUser._id}}" data-icon="p">Persönliches</a>
             <a href="/settings" data-icon="q">Konto</a>
             <a href="{{helpPath}}" data-icon="h">Hilfe &amp; Kontakt</a>
@@ -24,8 +25,6 @@
         </div>
       </div>
       {{/if}}
-
-
     </nav>
   </header>
 </template>

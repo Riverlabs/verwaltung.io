@@ -44,6 +44,9 @@ removeLibraryItem = () ->
 isPublicPage = (page) ->
   page in ['help', 'helpHistory']
 
+isAdminPage = (page) ->
+  page in ['adminDashboard']
+
 isAuthenticationPage = (page) ->
   page in ['login', 'register', 'welcome']
 
@@ -69,6 +72,7 @@ Meteor.pages
   '/library/item/:_id/remove': to: 'library', as: 'removeLibraryItem', before: [removeLibraryItem]
   '/contacts/:_id': to: 'showContact', before: [setContact]
   '/contacts/:_id/edit': to: 'editContact', before: [setContact]
+  '/admin': to: 'adminDashboard'
   '*': to: 'notFound'
 , defaults:
   layout: 'layout'
@@ -82,7 +86,7 @@ Meteor.pages
       @layout 'framelessLayout'
       return @done()
     if Meteor.userId()
-      @redirect '/' if isAuthenticationPage @page.name
+      @redirect '/' if isAuthenticationPage @page.name or (isAdminPage @page.name and not Meteor.user().admin)
     else unless (isAuthenticationPage @page.name) or (isPublicPage @page.name)
       @template 'login'
       @layout 'framelessLayout'
