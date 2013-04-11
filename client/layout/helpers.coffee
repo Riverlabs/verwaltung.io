@@ -43,7 +43,10 @@ Handlebars.registerHelper 'session', (title) ->
   Session.get title
 
 Handlebars.registerHelper 'equals', (a, b) ->
-  a is b
+  if _.isArray a
+    return b in a
+  else
+    return a is b
 
 Meteor.autorun () ->
   versions = HelpHistory.find

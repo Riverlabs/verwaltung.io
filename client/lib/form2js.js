@@ -36,14 +36,16 @@ var form2js = (function()
    * @param rootNode {Element|String} root form element (or it's id) or array of root elements
    * @param delimiter {String} structure parts delimiter defaults to '.'
    * @param skipEmpty {Boolean} should skip empty text values, defaults to true
+   * @param emptyToNull {Boolean} should empty values be converted to null?
    * @param nodeCallback {Function} custom function to get node value
    * @param useIdIfEmptyName {Boolean} if true value of id attribute of field will be used if name of field is empty
    */
-  function form2js(rootNode, delimiter, skipEmpty, nodeCallback, useIdIfEmptyName)
+  function form2js(rootNode, delimiter, skipEmpty, emptyToNull, nodeCallback, useIdIfEmptyName)
   {
     if (typeof skipEmpty == 'undefined' || skipEmpty == null) skipEmpty = true;
+    if (typeof emptyToNull == 'undefined' || emptyToNull == null) emptyToNull = true;
     if (typeof delimiter == 'undefined' || delimiter == null) delimiter = '.';
-    if (arguments.length < 5) useIdIfEmptyName = false;
+    if (arguments.length < 6) useIdIfEmptyName = false;
 
     rootNode = typeof rootNode == 'string' ? document.getElementById(rootNode) : rootNode;
 
@@ -52,7 +54,7 @@ var form2js = (function()
       i = 0;
 
     /* If rootNode is array - combine values */
-    if (rootNode.constructor == Array || (typeof NodeList != "undefined" && rootNode.constructor == NodeList))
+    if (rootNode.constructor == Array || (typeof NodeList != 'undefined' && rootNode.constructor == NodeList))
     {
       while(currNode = rootNode[i++])
       {
@@ -64,7 +66,7 @@ var form2js = (function()
       formValues = getFormValues(rootNode, nodeCallback, useIdIfEmptyName);
     }
 
-    return processNameValues(formValues, skipEmpty, delimiter);
+    return processNameValues(formValues, skipEmpty, emptyToNull, delimiter);
   }
 
   /**
@@ -73,7 +75,7 @@ var form2js = (function()
    * @param skipEmpty if true skips elements with value == '' or value == null
    * @param delimiter
    */
-  function processNameValues(nameValues, skipEmpty, delimiter)
+  function processNameValues(nameValues, skipEmpty, emptyToNull, delimiter)
   {
     var result = {},
       arrays = {},
@@ -92,9 +94,12 @@ var form2js = (function()
     {
       value = nameValues[i].value;
 
+      if (emptyToNull && (value === '')) { value = null; }
       if (skipEmpty && (value === '' || value === null)) continue;
 
       name = nameValues[i].name;
+      if (typeof name === 'undefined') continue;
+
       _nameParts = name.split(delimiter);
       nameParts = [];
       currResult = result;
@@ -226,7 +231,12 @@ var form2js = (function()
     
     while (currentNode)
     {
-      result = result.concat(extractNodeValues(currentNode, nodeCallback, useIdIfEmptyName));
+      var currentResult = extractNodeValues(currentNode, nodeCallback, useIdIfEmptyName);
+                for (var i = 0; i < currentResult.length;i++ ) {
+                    if(currentResult[i].value !== null) {
+                          result[result.length] = currentResult[i];                    
+                    }
+                }
       currentNode = currentNode.nextSibling;
     }
 
@@ -242,8 +252,11 @@ var form2js = (function()
             result = [callbackResult];
         }
         else if (fieldName != '' && node.nodeName.match(/INPUT|TEXTAREA/i)) {
-            fieldValue = getFieldValue(node);
-      result = [ { name: fieldName, value: fieldValue} ];
+            fieldValue = getFieldValue(node);   
+          if (fieldValue == null && node.type == 'radio')
+                result = [];
+            else
+                result = [ { name: fieldName, value: fieldValue} ];
         }
         else if (fieldName != '' && node.nodeName.match(/SELECT/i)) {
           fieldValue = getFieldValue(node);
@@ -273,9 +286,11 @@ var form2js = (function()
       case 'TEXTAREA':
         switch (fieldNode.type.toLowerCase()) {
           case 'radio':
+            if (fieldNode.checked) return fieldNode.value;
+            break;
           case 'checkbox':
-                        if (fieldNode.checked && fieldNode.value === "true") return true;
-                        if (!fieldNode.checked && fieldNode.value === "true") return false;
+                        if (fieldNode.checked && (fieldNode.value === 'true' || fieldNode.value === 'on')) return true;
+                        if (!fieldNode.checked && (fieldNode.value === 'true' || fieldNode.value === 'on')) return false;
             if (fieldNode.checked) return fieldNode.value;
             break;
 
@@ -312,7 +327,7 @@ var form2js = (function()
 
     if (!multiple) return selectNode.value;
 
-    for (options = selectNode.getElementsByTagName("option"), i = 0, l = options.length; i < l; i++)
+    for (options = selectNode.getElementsByTagName('option'), i = 0, l = options.length; i < l; i++)
     {
       if (options[i].selected) result.push(options[i].value);
     }
@@ -363,6 +378,7 @@ var form2js = (function()
         mode: 'first', // what to convert: 'all' or 'first' matched node
         delimiter: ".",
         skipEmpty: true,
+        emptyToNull: true,
         nodeCallback: null,
         useIdIfEmptyName: false
       };
@@ -375,16 +391,16 @@ var form2js = (function()
     switch(settings.mode)
     {
       case 'first':
-        return form2js(this.get(0), settings.delimiter, settings.skipEmpty, settings.nodeCallback, settings.useIdIfEmptyName);
+        return form2js(this.get(0), settings.delimiter, settings.skipEmpty, settings.emptyToNull, settings.nodeCallback, settings.useIdIfEmptyName);
         break;
       case 'all':
         this.each(function(){
-          result.push(form2js(this, settings.delimiter, settings.skipEmpty, settings.nodeCallback, settings.useIdIfEmptyName));
+          result.push(form2js(this, settings.delimiter, settings.skipEmpty, settings.emptyToNull, settings.nodeCallback, settings.useIdIfEmptyName));
         });
         return result;
         break;
       case 'combine':
-        return form2js(Array.prototype.slice.call(this), settings.delimiter, settings.skipEmpty, settings.nodeCallback, settings.useIdIfEmptyName);
+        return form2js(Array.prototype.slice.call(this), settings.delimiter, settings.skipEmpty, settings.emptyToNull, settings.nodeCallback, settings.useIdIfEmptyName);
         break;
     }
   }

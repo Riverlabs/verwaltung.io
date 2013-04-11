@@ -1,0 +1,17 @@
+<template name="radioField">
+  {{#each options}}
+    <input type="radio" name="{{../_id}}" value="{{_id}}" {{#if equals ../value _id}}checked{{/if}}><span class="label">{{title}}</span><br>
+  {{/each}}
+</template>
+
+<template name="radioFieldTable">
+  {{valueTitle}}
+</template>
+
+<template name="radioFieldEdit">
+  {{#each options}}
+    <input type="radio" name="value" value="{{_id}}" {{#if equals ../value _id}}checked{{/if}}><span class="label">{{title}}</span><br>
+  {{/each}}
+  <button class="addOption">Auswahlmöglichkeit hinzufügen ...</button><br>
+  Doppelklicken auf Auswahlmöglichkeit zum Bearbeiten<br>
+</template>

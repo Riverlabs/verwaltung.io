@@ -8,7 +8,7 @@ _.extend Template.editLibraryItem,
   events: 
     'keyup input, change input, keyup textarea, change textarea, change select': (event) ->
       fields = {}
-      _.each $('form').toObject(skipEmpty: false), (value, key) ->
+      _.each $('form').toObject(skipEmpty: false, emptyToNull: false), (value, key) ->
         fields["fields.#{key}"] = value
       LibraryItems.update Meteor.router.pages().invocation().libraryItem,
         $set: fields

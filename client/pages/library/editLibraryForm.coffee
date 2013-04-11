@@ -30,7 +30,7 @@ _.extend Template.editLibraryFormField,
       Template.textFieldEdit(@)
   events: 
     'keyup input, change input, keyup textarea, change textarea, change select': (event, template) ->
-      Fields.update @_id, $set: $(template.firstNode).toObject(skipEmpty: false)
+      Fields.update @_id, $set: $(template.firstNode).toObject(skipEmpty: false, emptyToNull: false)
     'click .remove': () ->
       if confirm 'Wollen Sie dieses Feld wirklich unwiderruflich löschen? Beachten Sie: Diese Aktion kann die Darstellung der bestehenden Einträge beeinflussen.'
         Fields.remove @_id
