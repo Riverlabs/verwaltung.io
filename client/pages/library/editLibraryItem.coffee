@@ -3,6 +3,8 @@ _.extend Template.editLibraryItem,
     libraryItem = LibraryItems.findOne(Meteor.router.pages().invocation().libraryItem)
     if libraryItem
       return Libraries.findOne(libraryItem.library)
+  libraryItem: () ->
+    LibraryItems.findOne(Meteor.router.pages().invocation().libraryItem)
   fields: () ->
     Fields.find (library: @_id), (sort: created: 1)
   events: 

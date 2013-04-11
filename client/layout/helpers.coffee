@@ -42,6 +42,9 @@ Handlebars.registerHelper 'currentVersion', () ->
 Handlebars.registerHelper 'session', (title) ->
   Session.get title
 
+Handlebars.registerHelper 'getUser', (userId) ->
+  Meteor.users.findOne(userId)
+
 Handlebars.registerHelper 'equals', (a, b) ->
   if _.isArray a
     return b in a
@@ -62,3 +65,16 @@ Meteor.autorun () ->
     b = b.major*100000 + b.minor*1000 + b.patch
     return b - a
   Session.set 'versions', sortedVersions
+
+flattenObject = (ob) ->
+  toReturn = {}
+  for i of ob
+    continue  unless ob.hasOwnProperty(i)
+    if (typeof ob[i]) is "object"
+      flatObject = flattenObject(ob[i])
+      for x of flatObject
+        continue  unless flatObject.hasOwnProperty(x)
+        toReturn[i + "." + x] = flatObject[x]
+    else
+      toReturn[i] = ob[i]
+  toReturn

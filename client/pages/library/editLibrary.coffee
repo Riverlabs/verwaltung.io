@@ -1,9 +1,6 @@
 _.extend Template.editLibrary, 
   library: () ->
     Libraries.findOne(Meteor.router.pages().invocation().library)
-  created: () ->
-    @createdAt?.toISOString()
-  rendered: () -> $('abbr').timeago()
   events: 
     'submit form': (event) ->
       event.preventDefault()

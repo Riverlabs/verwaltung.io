@@ -5,6 +5,8 @@ Libraries.allow
     doc.createdAt = new Date()
     true
   update: (userId, doc, fieldNames, modifier) ->
+    modifier.$set.updatedBy = userId
+    modifier.$set.updatedAt = new Date()
     doc.createdBy is userId
   remove: (userId, doc) ->
     doc.createdBy is userId
@@ -12,9 +14,12 @@ Libraries.allow
 LibraryItems = new Meteor.Collection 'libraryitems'
 LibraryItems.allow
   insert: (userId, doc) ->
+    doc.createdBy = userId
     doc.createdAt = new Date()
     true
   update: (userId, doc, fieldNames, modifier) ->
+    modifier.$set.updatedBy = userId
+    modifier.$set.updatedAt = new Date()
     true
   remove: (userId, doc) ->
     true
@@ -23,9 +28,12 @@ LibraryItems.allow
 Fields = new Meteor.Collection 'fields'
 Fields.allow
   insert: (userId, doc) ->
+    doc.createdBy = userId
     doc.createdAt = new Date()
     true
   update: (userId, doc, fieldNames, modifier) ->
+    modifier.$set.updatedBy = userId
+    modifier.$set.updatedAt = new Date()
     true
   remove: (userId, doc) ->
     true

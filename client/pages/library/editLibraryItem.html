@@ -11,6 +11,9 @@
       {{>message}}
       <div class="inner flex scrollable">
         <h1>Eintrag bearbeiten</h1>
+        {{#with libraryItem}}
+          <h3>Dieser Eintrag wurde <abbr title="{{createdAt}}">{{createdAt}}</abbr> von {{#with getUser createdBy}}<a href="{{showContactPath}}">{{profile.name}}</a>{{/with}} erstellt {{#if updatedAt}}<br>und <abbr title="{{updatedAt}}">{{updatedAt}}</abbr> von {{#with getUser updatedBy}}<a href="{{showContactPath}}">{{profile.name}}</a>{{/with}} bearbeitet{{/if}}.</h3>
+        {{/with}}
         <fieldset>
           {{#each fields}}
             {{>editLibraryItemField}}
