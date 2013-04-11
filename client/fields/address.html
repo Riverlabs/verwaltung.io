@@ -7,7 +7,7 @@
 </template>
 
 <template name="addressFieldTable">
-  {{value.street}}, {{value.zip}} {{value.city}}, {{value.state}}, {{value.country}}
+  <span class="address">{{value.street}}<br> {{value.zip}} {{value.city}}<br> {{value.state}} {{value.country}}</span>
 </template>
 
 <template name="addressFieldEdit">

@@ -13,8 +13,11 @@ FIELDTYPES = [
     label: 'Auswahl'
     type: 'select'
   ,
-    label: 'Mehrfachauswahl'
-    type: 'multiselect'
+    label: 'Optionsfelder'
+    type: 'radio'
+  ,
+    label: 'Kontrollkästchen'
+    type: 'checkbox'
   ,
     label: 'Stichworte (autom. Vervollständigung)'
     type: 'tags'
