@@ -93,7 +93,6 @@ Meteor.pages
     if Meteor.loggingIn()
       @template 'loading'
       @layout 'framelessLayout'
-      woopraTracker?.pushEvent name: 'logginIn'
       return @done()
     if Meteor.userId()
       Intercom 'update',

@@ -7,4 +7,5 @@ _.extend Template.login,
         if error
           Session.set 'message', type: 'error', text: error.reason
         else
+          woopraTracker?.pushEvent name: 'logginIn'
           Meteor.go('/')
