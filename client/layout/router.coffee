@@ -11,6 +11,7 @@ setLibraryItem = () ->
 createLibrary = () ->
   library = Libraries.insert({})
   Meteor.go Meteor.editLibraryPath({_id: library})
+  woopraTracker.pushEvent name: 'createdLibrary', id: library
   return @stop()
 
 createLibraryItem = () ->
@@ -22,6 +23,7 @@ createLibraryItem = () ->
     library: @params._id
     fields: fields
   Meteor.go Meteor.editLibraryItemPath({_id: libraryItem})
+  woopraTracker.pushEvent name: 'createdLibraryItem', id: libraryItem
   return @stop()
 
 removeLibrary = () ->
@@ -29,6 +31,7 @@ removeLibrary = () ->
     Libraries.remove @params._id
     Meteor.go Meteor.dashboardPath()
     Session.set 'message', type: 'success', text: 'Die Bibliothek wurde erfolgreich gelöscht.'
+    woopraTracker.pushEvent name: 'removedLibrary', id: @params._id
   else
     Meteor.go Meteor.editLibraryPath({_id: @params._id})
   return @stop()
@@ -38,6 +41,7 @@ removeLibraryItem = () ->
   if confirm 'Wollen Sie diesen Eintrag wirklich unwiderruflich löschen?'
     LibraryItems.remove @params._id
     Session.set 'message', type: 'success', text: 'Der Eintrag wurde erfolgreich gelöscht.'
+    woopraTracker.pushEvent name: 'removedLibraryItem', id: @params._id
   Meteor.go Meteor.libraryPath(_id: libraryId)
   return @stop()
 
@@ -53,6 +57,7 @@ isAuthenticationPage = (page) ->
 logout = () ->
   @redirect Meteor.loginPath()
   Meteor.logout ->
+    woopraTracker.pushEvent name: 'loggingOut'
     Session.set 'message', type: 'success', text: 'Erfolgreich abgemeldet.'
 
 Meteor.pages
@@ -84,10 +89,49 @@ Meteor.pages
     if Meteor.loggingIn()
       @template 'loading'
       @layout 'framelessLayout'
+      woopraTracker.pushEvent name: 'logginIn'
       return @done()
     if Meteor.userId()
+      Intercom 'update',
+        path: Meteor.router.path()
       @redirect '/' if isAuthenticationPage @page.name or (isAdminPage @page.name and not Meteor.user().admin)
     else unless (isAuthenticationPage @page.name) or (isPublicPage @page.name)
       @template 'login'
       @layout 'framelessLayout'
+
+Meteor.autorun () ->
+  if Meteor.user()
+
+    user =         
+      email: Meteor.user().emails?[0]?.address
+      name: Meteor.user().profile.name
+      created_at: Math.floor Meteor.user().createdAt/1000
+      path: Meteor.router.path()
+      user_id: Meteor.userId()
+    woopraTracker.addVisitorProperty 'name', Meteor.user().profile.name
+    woopraTracker.addVisitorProperty 'email', Meteor.user().emails?[0]?.address
+    # woopraTracker.trackPageview
+    #   url: Meteor.router.path()
+    if window.IntercomActive
+      Intercom 'update', user
+    else
+      window.IntercomActive = true
+      Intercom 'boot', _.extend user, app_id: 'nq381rbw'
+
+        # email: 'john.doe@example.com'
+        # created_at: 1234567890
+        # name: 'John Doe'
+        # user_id: '9876'
+
+woopraReady = (tracker) ->
+  tracker.setDomain('verwaltung.io')
+#   tracker.setIdleTimeout(1800000)
+
+#   # tracker.addVisitorProperty('name', '$account.name');
+#   # tracker.addVisitorProperty('email', '$account.email');
+#   # tracker.addVisitorProperty('company', '$account.company');
+#   # woopraTracker.pushEvent(event)
+
+  # tracker.track()
+  return false
 

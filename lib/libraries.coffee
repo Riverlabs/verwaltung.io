@@ -49,7 +49,7 @@ if Meteor.isServer
     # TODO: Only publish fields for current user
     Fields.find()
   Meteor.publish 'userData', () ->
-    Meteor.users.find(_id: @userId, {fields: admin: 1})
+    Meteor.users.find(_id: @userId, {fields: admin: 1, createdAt: 1})
   Meteor.publish 'allUserData', () ->
     # TODO: Auf Benutzer einschränken mit denenen der angemeldete Benutzer in Kontakt ist.
     Meteor.users.find({}, {fields: profile: 1})

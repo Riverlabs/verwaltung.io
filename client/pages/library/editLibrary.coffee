@@ -7,4 +7,5 @@ _.extend Template.editLibrary,
       Libraries.update Meteor.router.pages().invocation().library, 
         $set: $('form').toObject(), 
         () ->
+          woopraTracker.pushEvent name: 'editedLibrary', id: Meteor.router.pages().invocation().library
           Session.set 'message', type: 'success', text: 'Ihre Änderungen wurden erfolgreich gespeichert.'
