@@ -2,6 +2,22 @@
   <div class="{{pageLayout}}" id="{{pageTemplate}}">
     {{>logo}}
     <section class="page small">
+      Die Registrierung ist im Moment nicht aktiv.<br>
+      Bei Interesse an einem Benutzerkonto wenden Sie sich an <a href="mailto:beta@verwaltung.io">beta@verwaltung.io</a>.
+    </section>
+    <div class="switchAuth">
+      Besitzen Sie schon ein Konto? 
+      <a href="{{loginPath}}">
+        Jetzt anmelden.
+      </a>
+    </div>
+  </div>
+</template>
+
+<template name="registerActive">
+  <div class="{{pageLayout}}" id="{{pageTemplate}}">
+    {{>logo}}
+    <section class="page small">
       <form>
         {{>message}}
         <fieldset>
