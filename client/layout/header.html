@@ -1,22 +1,33 @@
 <template name="pageHeader">
-  
   <header id="pageHeader" class="flexContainer">
     <a href="{{dashboardPath}}">
       {{>logo}}
     </a>
     <div class="flex"></div>
-    
     <nav>
-      
-      <a href="{{helpPath}}">Hilfe &amp; Kontakt</a>
-      <a href="{{helpHistoryPath}}">Versionshinweise</a>
+      <div class="links">
+        <a href="{{helpPath}}">Hilfe &amp; Kontakt</a>
+        <a href="{{helpHistoryPath}}">Versionshinweise</a>
+        <a href="{{helpPath}}">Impressum</a>
+      </div>
       {{#if currentUser}}
-      <a href="/logout">Abmelden <span class="name">({{currentUser.profile.name}})</span></a>
+      <div class="settings">      
+        <div class="dropdown">
+          <div class="dropdownToggle" data-icon="t">{{currentUser.profile.name}}</div>
+          <div class="dropdownMenu">
+            <a href="/contacts/{{currentUser._id}}" data-icon="p">Persönliches</a>
+            <a href="/settings" data-icon="q">Konto</a>
+            <a href="{{helpPath}}" data-icon="h">Hilfe &amp; Kontakt</a>
+            <a href="{{helpHistoryPath}}" data-icon="r">Versionshinweise</a>
+            <a href="/logout" data-icon="z">Abmelden</a>
+          </div>
+        </div>
+      </div>
       {{/if}}
+
+
     </nav>
-    
   </header>
-  
 </template>
 
 <template name="logo">

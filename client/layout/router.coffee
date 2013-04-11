@@ -64,6 +64,7 @@ Meteor.pages
   '/library/:_id/create': to: 'editLibraryItem', as: 'createLibraryItem', before: [createLibraryItem]
   '/library/item/:_id/edit': to: 'editLibraryItem', before: [setLibraryItem]
   '/library/item/:_id/remove': to: 'library', as: 'removeLibraryItem', before: [removeLibraryItem]
+  '*': to: 'notFound'
 , defaults:
   layout: 'layout'
   before: () ->

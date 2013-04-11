@@ -1,7 +1,9 @@
 .logo.small
   font-family 'Asap', sans-serif
   text-align left
-  padding-top 15px
+  padding-top 20px
+  padding-left 20px
+  padding-bottom 20px
   #logo
     height 31px
     width 60px
@@ -46,13 +48,67 @@
 #pageHeader
   text-align right
   width 100%
-  max-width 1000px
+  // max-width 1000px
   nav
-    .name
-      font-weight normal
-    a
+    margin-right 25px
+    margin-top 26px
+    .dropdown
       color rgba(#000, 0.25)
+      position relative
+      .dropdownToggle
+        height 31px
+        box-sizing border-box
+        padding 5px 25px 0 10px
+        cursor pointer
+        min-width 140px
+        text-align left
+        border 1px solid rgba(#000, 0.1)
+        &:before
+          position absolute
+          right 5px
+          top 7px
+          font-size 12px
+          opacity 0.5
+      .dropdownMenu
+        display none
+        position absolute
+        min-width 100%
+        top 31px
+        right 0
+        background #fff
+        // border 1px solid #fff
+        z-index 100
+        box-shadow 0px 5px 10px rgba(#000, 0.2)
+        padding 5px 0
+        box-sizing border-box
+        a
+          display block
+          padding 2px 15px 2px 10px
+          text-align left
+          color rgba(#000, 0.25)
+          white-space nowrap
+          &:hover
+            color #C0190C
+          &:before
+            font-size 18px
+    &:hover 
+      .dropdownToggle
+        background #C0190C
+        color #fff
+      .dropdownMenu
+        display block
+    .settings
       font-weight 700
-      font-size 13px
-      display inline-block
-      margin 45px 0 15px 15px
+    .links
+      display none
+    // a
+    //   color rgba(#000, 0.25)
+    //   font-size 13px
+    //   display inline-block
+    //   margin 0 0 5px 10px
+    //   &.username
+    //     &:before
+    //       float right
+    //       margin-left 7px
+    //       font-size 10px
+    //       padding-top 1px
