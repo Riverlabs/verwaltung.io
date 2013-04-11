@@ -11,7 +11,7 @@ setLibraryItem = () ->
 createLibrary = () ->
   library = Libraries.insert({})
   Meteor.go Meteor.editLibraryPath({_id: library})
-  woopraTracker.pushEvent name: 'createdLibrary', id: library
+  woopraTracker?.pushEvent name: 'createdLibrary', id: library
   return @stop()
 
 createLibraryItem = () ->
@@ -23,7 +23,7 @@ createLibraryItem = () ->
     library: @params._id
     fields: fields
   Meteor.go Meteor.editLibraryItemPath({_id: libraryItem})
-  woopraTracker.pushEvent name: 'createdLibraryItem', id: libraryItem
+  woopraTracker?.pushEvent name: 'createdLibraryItem', id: libraryItem
   return @stop()
 
 removeLibrary = () ->
@@ -31,7 +31,7 @@ removeLibrary = () ->
     Libraries.remove @params._id
     Meteor.go Meteor.dashboardPath()
     Session.set 'message', type: 'success', text: 'Die Bibliothek wurde erfolgreich gelöscht.'
-    woopraTracker.pushEvent name: 'removedLibrary', id: @params._id
+    woopraTracker?.pushEvent name: 'removedLibrary', id: @params._id
   else
     Meteor.go Meteor.editLibraryPath({_id: @params._id})
   return @stop()
@@ -41,7 +41,7 @@ removeLibraryItem = () ->
   if confirm 'Wollen Sie diesen Eintrag wirklich unwiderruflich löschen?'
     LibraryItems.remove @params._id
     Session.set 'message', type: 'success', text: 'Der Eintrag wurde erfolgreich gelöscht.'
-    woopraTracker.pushEvent name: 'removedLibraryItem', id: @params._id
+    woopraTracker?.pushEvent name: 'removedLibraryItem', id: @params._id
   Meteor.go Meteor.libraryPath(_id: libraryId)
   return @stop()
 
@@ -57,7 +57,7 @@ isAuthenticationPage = (page) ->
 logout = () ->
   @redirect Meteor.loginPath()
   Meteor.logout ->
-    woopraTracker.pushEvent name: 'loggingOut'
+    woopraTracker?.pushEvent name: 'loggingOut'
     Session.set 'message', type: 'success', text: 'Erfolgreich abgemeldet.'
 
 Meteor.pages
@@ -82,6 +82,10 @@ Meteor.pages
 , defaults:
   layout: 'layout'
   before: () ->
+    unless window.lastPath is Meteor.router.path()
+      woopraTracker?.trackPageview
+        url: Meteor.router.path()
+    window.lastPath = Meteor.router.path()
     unless $.browser.webkit
       @template 'browserNotSupported'
       @layout 'framelessLayout'
@@ -89,7 +93,7 @@ Meteor.pages
     if Meteor.loggingIn()
       @template 'loading'
       @layout 'framelessLayout'
-      woopraTracker.pushEvent name: 'logginIn'
+      woopraTracker?.pushEvent name: 'logginIn'
       return @done()
     if Meteor.userId()
       Intercom 'update',
@@ -99,6 +103,11 @@ Meteor.pages
       @template 'login'
       @layout 'framelessLayout'
 
+Meteor.autorun () ->
+  if Meteor.router.template()
+    woopraTracker?.pushEvent 
+      name: 'changedTemplate'
+      template: Meteor.router.template()
 Meteor.autorun () ->
   if Meteor.user()
 
