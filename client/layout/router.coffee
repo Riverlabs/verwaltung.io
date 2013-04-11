@@ -107,29 +107,34 @@ Meteor.autorun () ->
     woopraTracker?.pushEvent 
       name: 'changedTemplate'
       template: Meteor.router.template()
-Meteor.autorun () ->
-  if Meteor.user()
+Meteor.startup () ->
+  Meteor.autorun () ->
+    if Meteor.user() and Intercom?
 
-    user =         
-      email: Meteor.user().emails?[0]?.address
-      name: Meteor.user().profile.name
-      created_at: Math.floor Meteor.user().createdAt/1000
-      path: Meteor.router.path()
-      user_id: Meteor.userId()
-    woopraTracker.addVisitorProperty 'name', Meteor.user().profile.name
-    woopraTracker.addVisitorProperty 'email', Meteor.user().emails?[0]?.address
-    # woopraTracker.trackPageview
-    #   url: Meteor.router.path()
-    if window.IntercomActive
-      Intercom 'update', user
-    else
-      window.IntercomActive = true
-      Intercom 'boot', _.extend user, app_id: 'nq381rbw'
+      user =         
+        email: Meteor.user().emails?[0]?.address
+        name: Meteor.user().profile.name
+        created_at: Math.floor Meteor.user().createdAt/1000
+        path: Meteor.router.path()
+        user_id: Meteor.userId()
+        template: Meteor.router.template()
+      woopraTracker.addVisitorProperty 'name', Meteor.user().profile.name
+      woopraTracker.addVisitorProperty 'email', Meteor.user().emails?[0]?.address
+      # woopraTracker.trackPageview
+      #   url: Meteor.router.path()
+      if window.IntercomActive
+        Meteor.clearInterval window.IntercomInterval
+        window.IntercomInterval = Meteor.setInterval () ->
+          Intercom 'update', user
+        , 10*1000
+      else
+        window.IntercomActive = true
+        Intercom 'boot', _.extend user, app_id: 'nq381rbw'
 
-        # email: 'john.doe@example.com'
-        # created_at: 1234567890
-        # name: 'John Doe'
-        # user_id: '9876'
+          # email: 'john.doe@example.com'
+          # created_at: 1234567890
+          # name: 'John Doe'
+          # user_id: '9876'
 
 woopraReady = (tracker) ->
   tracker.setDomain('verwaltung.io')
