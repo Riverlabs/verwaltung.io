@@ -5,8 +5,8 @@ Libraries.allow
     doc.createdAt = new Date()
     true
   update: (userId, doc, fieldNames, modifier) ->
-    modifier.$set.updatedBy = userId
-    modifier.$set.updatedAt = new Date()
+    modifier.$set?.updatedBy = userId
+    modifier.$set?.updatedAt = new Date()
     (doc.createdBy is userId) or (Meteor.users.findOne(userId)?.admin)
   remove: (userId, doc) ->
     doc.createdBy is userId
@@ -18,8 +18,8 @@ LibraryItems.allow
     doc.createdAt = new Date()
     true
   update: (userId, doc, fieldNames, modifier) ->
-    modifier.$set.updatedBy = userId
-    modifier.$set.updatedAt = new Date()
+    modifier.$set?.updatedBy = userId
+    modifier.$set?.updatedAt = new Date()
     true
   remove: (userId, doc) ->
     true
@@ -32,8 +32,8 @@ Fields.allow
     doc.createdAt = new Date()
     true
   update: (userId, doc, fieldNames, modifier) ->
-    modifier.$set.updatedBy = userId
-    modifier.$set.updatedAt = new Date()
+    modifier.$set?.updatedBy = userId
+    modifier.$set?.updatedAt = new Date()
     true
   remove: (userId, doc) ->
     true
