@@ -127,8 +127,8 @@ Meteor.startup () ->
         path: Meteor.router.path()
         user_id: Meteor.userId()
         template: Meteor.router.template()
-      woopraTracker.addVisitorProperty 'name', Meteor.user().profile.name
-      woopraTracker.addVisitorProperty 'email', Meteor.user().emails?[0]?.address
+      woopraTracker?.addVisitorProperty 'name', Meteor.user().profile.name
+      woopraTracker?.addVisitorProperty 'email', Meteor.user().emails?[0]?.address
       # woopraTracker.trackPageview
       #   url: Meteor.router.path()
       if window.IntercomActive
