@@ -7,7 +7,7 @@ Libraries.allow
   update: (userId, doc, fieldNames, modifier) ->
     modifier.$set.updatedBy = userId
     modifier.$set.updatedAt = new Date()
-    (doc.createdBy is userId) or (Meteor.users.find(userId)?.admin)
+    (doc.createdBy is userId) or (Meteor.users.findOne(userId)?.admin)
   remove: (userId, doc) ->
     doc.createdBy is userId
 
@@ -42,7 +42,7 @@ Fields.allow
 if Meteor.isServer
   Meteor.publish 'libraries', () ->
     if @userId
-      if Meteor.users.find(@userId)?.admin
+      if Meteor.users.findOne(@userId)?.admin
         return Libraries.find()
       else
         return Libraries.find(createdBy: @userId)
