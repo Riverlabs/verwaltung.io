@@ -7,7 +7,7 @@ Libraries.allow
   update: (userId, doc, fieldNames, modifier) ->
     modifier.$set.updatedBy = userId
     modifier.$set.updatedAt = new Date()
-    doc.createdBy is userId
+    (doc.createdBy is userId) or (Meteor.users.find(userId)?.admin)
   remove: (userId, doc) ->
     doc.createdBy is userId
 
@@ -41,7 +41,11 @@ Fields.allow
 
 if Meteor.isServer
   Meteor.publish 'libraries', () ->
-    Libraries.find(createdBy: @userId)
+    if @userId
+      if Meteor.users.find(@userId)?.admin
+        return Libraries.find()
+      else
+        return Libraries.find(createdBy: @userId)
   Meteor.publish 'libraryitems', () ->
     # TODO: Only publish items for current user
     LibraryItems.find()
@@ -53,4 +57,3 @@ if Meteor.isServer
   Meteor.publish 'allUserData', () ->
     # TODO: Auf Benutzer einschränken mit denenen der angemeldete Benutzer in Kontakt ist.
     Meteor.users.find({}, {fields: profile: 1})
-    console.log @
