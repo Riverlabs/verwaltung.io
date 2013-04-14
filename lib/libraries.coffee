@@ -9,7 +9,7 @@ Libraries.allow
     modifier.$set?.updatedAt = new Date()
     (doc.createdBy is userId) or (Meteor.users.findOne(userId)?.admin)
   remove: (userId, doc) ->
-    doc.createdBy is userId
+    (doc.createdBy is userId) or (Meteor.users.findOne(userId)?.admin)
 
 LibraryItems = new Meteor.Collection 'libraryitems'
 LibraryItems.allow
