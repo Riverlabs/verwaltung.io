@@ -40,6 +40,10 @@
     {{#each values}}
     <td>{{{field}}}</td>
     {{/each}}
-    <td class="actions"><a href="{{editLibraryItemPath}}" data-icon="e" title="Bearbeiten"></a> <a href="{{removeLibraryItemPath}}" data-icon="d" title="Löschen"></a></td>
+    <td class="actions">
+      <a href="{{duplicateLibraryItemPath}}" data-icon="o" title="Duplizieren"></a> 
+      <a href="{{editLibraryItemPath}}" data-icon="e" title="Bearbeiten"></a> 
+      <a href="{{removeLibraryItemPath}}" data-icon="d" title="Löschen"></a>
+    </td>
   </tr>
 </template>

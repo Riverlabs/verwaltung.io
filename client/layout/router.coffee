@@ -26,6 +26,14 @@ createLibraryItem = () ->
   woopraTracker?.pushEvent name: 'createdLibraryItem', id: libraryItem
   return @stop()
 
+duplicateLibraryItem = () ->
+  libraryItem = LibraryItems.findOne(@params._id)
+  delete libraryItem._id
+  libraryItem = LibraryItems.insert libraryItem
+  Meteor.go Meteor.editLibraryItemPath({_id: libraryItem})
+  woopraTracker?.pushEvent name: 'duplicatedLibraryItem', id: libraryItem
+  return @stop()
+
 removeLibrary = () ->
   if confirm 'Wollen Sie diese Bibliothek wirklich unwiderruflich löschen?'
     Libraries.remove @params._id
@@ -72,6 +80,7 @@ Meteor.pages
   '/library/:_id/edit': to: 'editLibrary', before: [setLibrary]
   '/library/:_id/form': to: 'editLibraryForm', before: [setLibrary]
   '/library/:_id/remove': to: 'dashboard', as: 'removeLibrary', before: [removeLibrary]
+  '/library/item/:_id/duplicate': to: 'editLibraryItem', as: 'duplicateLibraryItem', before: [duplicateLibraryItem]
   '/library/:_id/create': to: 'editLibraryItem', as: 'createLibraryItem', before: [createLibraryItem]
   '/library/item/:_id/edit': to: 'editLibraryItem', before: [setLibraryItem]
   '/library/item/:_id/remove': to: 'library', as: 'removeLibraryItem', before: [removeLibraryItem]
