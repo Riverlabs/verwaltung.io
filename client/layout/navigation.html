@@ -2,6 +2,12 @@
   {{#if currentUser}}
   <nav id="navigation" class="flexContainer flexColumn">
     <div class="flex flexContainer flexColumn scrollable ">
+      <div class="accounts">
+        <select name="accounts" id="accounts">
+          <option value="1">Riverlabs GmbH</option>
+          <option value="2">Privat</option>
+        </select>
+      </div>
       {{#each libraries}}
         <a href="{{libraryPath}}" data-icon="l" class="{{activeClass}}">{{#if title}}{{title}}{{else}}Bibliothek{{/if}}</a>
       {{/each}}
