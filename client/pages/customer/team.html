@@ -1,0 +1,43 @@
+<template name="customerTeam">
+  {{#with customer}}
+  {{>customerSidebar}}
+  <section class="content flex flexContainer">
+    <div class="flex scrollable fullscreen inner">
+      <div class="actions topActions">
+        <a href="{{createLibraryItemPath}}" data-icon="i" class="new">
+          Teammitglied einladen
+        </a>
+      </div>
+      <h1 class="line" data-icon="g">Team</h1>
+      <table class="team">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Name</th>
+            <th>E-Mail-Adresse</th>
+            <th>Rolle</th>
+            <th class="actions">Aktionen</th>
+          </tr>
+        </thead>
+        {{#each users}}
+        <tr class="member">
+          <td class="picture"><img src="https://fbcdn-sphotos-b-a.akamaihd.net/hphotos-ak-prn1/309179_10151198713755289_1862935627_n.jpg"></td>
+          <td class="name"><a href="{{showContactPath}}">{{profile.name}}</a></td>
+          <td class="mail">{{emails.0.address}}</td>
+          <td class="role">
+            <select name="role">
+              <option value="">Lesezugriff</option>
+              <option value="">Lese- & Schreibzugriff</option>
+              <option value="">Administrator</option>
+          </td>
+          <td class="actions">
+            <a href="{{showContactPath}}" data-icon="p" title="Profil anzeigen"></a>
+            <a href="{{removeLibraryItemPath}}" data-icon="d" title="Löschen"></a>
+          </td>
+        </tr>
+        {{/each}}
+      </table>
+    </div>
+  </section>
+  {{/with}}
+</template>

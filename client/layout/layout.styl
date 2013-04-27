@@ -18,11 +18,13 @@ h1
   font-weight normal
   font-size 25px
   line-height 35px
+  margin-bottom 10px
   input
     font-size 25px
 h2
   font-size 17px
   padding 10px 0
+  margin-bottom 10px
 h3
   color rgba(#000, 0.25)
   margin-top 10px
@@ -58,9 +60,26 @@ h3
     width 100%
     // max-width 1000px
     aside
-      padding 25px
-      width 200px
+      width 250px
       border-top 4px solid #C0190C
+      p
+        color rgba(#000, 0.5)
+      nav
+        a
+          display block
+          padding 15px 25px 12px
+          border-top 1px solid rgba(#000, 0.1)
+          &:last-of-type
+            border-bottom 1px solid rgba(#000, 0.1)
+          &.active
+            font-weight bold
+            color #fff
+            background #C0190C
+          &:before
+            font-size 23px
+            padding-top 4px
+            margin-right 10px
+            display inline-block
       .steps
         counter-reset: stepCounter
         margin-top 20px

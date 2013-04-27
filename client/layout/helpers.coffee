@@ -42,6 +42,10 @@ Handlebars.registerHelper 'currentVersion', () ->
 Handlebars.registerHelper 'session', (title) ->
   Session.get title
 
+Handlebars.registerHelper 'customer', (title) ->
+  Customers.findOne()
+
+
 Handlebars.registerHelper 'getUser', (userId) ->
   Meteor.users.findOne(userId)
 

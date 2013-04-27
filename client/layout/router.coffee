@@ -54,7 +54,7 @@ removeLibraryItem = () ->
   return @stop()
 
 isPublicPage = (page) ->
-  page in ['help', 'helpHistory']
+  page in ['help', 'helpHistory', 'home']
 
 isAdminPage = (page) ->
   page in ['adminDashboard']
@@ -68,8 +68,12 @@ logout = () ->
     woopraTracker?.pushEvent name: 'loggingOut'
     Session.set 'message', type: 'success', text: 'Erfolgreich abgemeldet.'
 
+dashboard = () ->
+  if Meteor.userId()
+    @template 'dashboard'
+
 Meteor.pages
-  '/': to: 'dashboard'
+  '/': to: 'home', before: [dashboard]
   '/help': to: 'help'
   '/help/history': to: 'helpHistory'
   '/register': to: 'register', layout: 'framelessLayout'
@@ -86,6 +90,11 @@ Meteor.pages
   '/library/item/:_id/remove': to: 'library', as: 'removeLibraryItem', before: [removeLibraryItem]
   '/contacts/:_id': to: 'showContact', before: [setContact]
   '/contacts/:_id/edit': to: 'editContact', before: [setContact]
+  '/customer': to: 'customerDashboard', nav: 'dashboard'
+  '/customer/team': to: 'customerTeam', nav: 'team'
+  '/customer/billing': to: 'customerBilling', nav: 'billing'
+  '/customer/layout': to: 'customerLayout', nav: 'layout'
+  '/customer/settings': to: 'customerSettings', nav: 'settings'
   '/admin': to: 'adminDashboard'
   '*': to: 'notFound'
 , defaults:

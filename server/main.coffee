@@ -13,3 +13,9 @@ Meteor.methods
   'updateOption': (option, title) ->
     #TODO: Check permissions
     Fields.update (options: option), $set: 'options.$.title': title
+  # 'currentCustomer': (url) ->
+  #   console.log @
+  #   if url.split('.')[1] isnt 'riverlabs'
+  #     return Customers.findOne('domains.custom': url)?._id
+  #   else
+  #     return Customers.findOne('domains.subdomain': url.split('.')[0])?._id
