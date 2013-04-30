@@ -1,4 +1,4 @@
-Customers = new Meteor.Collection 'customers'
+@Customers = new Meteor.Collection 'customers'
 Customers.allow
   insert: (userId, doc) ->
     doc.owner = userId
@@ -12,7 +12,7 @@ Customers.allow
   remove: (userId, doc) ->
     (doc.owner is userId) or (Meteor.users.findOne(userId)?.admin)
 
-Libraries = new Meteor.Collection 'libraries'
+@Libraries = new Meteor.Collection 'libraries'
 Libraries.allow
   insert: (userId, doc) ->
     doc.createdBy = userId
@@ -25,7 +25,7 @@ Libraries.allow
   remove: (userId, doc) ->
     (doc.createdBy is userId) or (Meteor.users.findOne(userId)?.admin)
 
-LibraryItems = new Meteor.Collection 'libraryitems'
+@LibraryItems = new Meteor.Collection 'libraryitems'
 LibraryItems.allow
   insert: (userId, doc) ->
     doc.createdBy = userId
@@ -39,7 +39,7 @@ LibraryItems.allow
     true
 
 
-Fields = new Meteor.Collection 'fields'
+@Fields = new Meteor.Collection 'fields'
 Fields.allow
   insert: (userId, doc) ->
     doc.createdBy = userId

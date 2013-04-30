@@ -1,4 +1,4 @@
-HelpHistory = new Meteor.Collection 'helpHistory'
+@HelpHistory = new Meteor.Collection 'helpHistory'
 Meteor.autorun ->
   window.helpHistoryHandler = Meteor.subscribe "helpHistory"
 

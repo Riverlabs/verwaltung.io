@@ -9,6 +9,5 @@ handlebars
 accounts-base
 accounts-password
 preserve-inputs
-mini-pages
-jquery-ui
+
 showdown
