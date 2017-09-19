@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import { Forms } from '../../lib/collections';
 
-class App extends Component {
+class Chat extends Component {
   render() {
     return (
       <main>
@@ -21,4 +21,4 @@ export default createContainer(() => {
   return {
     forms: Forms.find({}).fetch(),
   };
-}, App);
+}, Chat);

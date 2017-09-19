@@ -2,11 +2,10 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor';
 import { render } from 'react-dom';
 import { Forms } from '../lib/collections';
-
-import App from './components/App';
+import { renderRoutes } from './routes';
 
 Meteor.startup(() => {
-  render(<App />, document.getElementById('react-app'));
+  render(renderRoutes(), document.getElementById('react-app'));
 });
 
 window.Forms = Forms
