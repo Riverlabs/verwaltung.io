@@ -10,6 +10,7 @@ import DataConfirmation from "./DataConfirmation";
 import Success from "./Success";
 import Sending from "./Sending";
 import Done from "./Done";
+import TextSelect from "./TextSelect";
 
 class Chat extends Component {
   verimi = new Verimi()
@@ -73,6 +74,8 @@ class Chat extends Component {
         )
       case "data-confirmation":
         return <DataConfirmation conversation={this.props.conversation} onFinish={this.goToNextStep.bind(this)}/>
+      case "text":
+        return <TextSelect conversation={this.props.conversation} onFinish={this.goToNextStep.bind(this)} question={message.question} prop={message.key}/>
       case "success":
         return <Success conversation={this.props.conversation} onFinish={this.goToNextStep.bind(this)}/>
       case "send":
