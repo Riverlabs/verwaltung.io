@@ -3,8 +3,12 @@ import { Meteor } from 'meteor/meteor';
 import { Random } from 'meteor/random';
 
 export default class Verimi {
+  contructor() {
+    this.options = null;
+  }
+
   get redirectUrl(){
-    return `${Meteor.absoluteUrl()}verimi`;
+    return `${Meteor.absoluteUrl()}conversation/${this.options.id}/${this.options.step}`;
   }
 
   get verimiTokenUrl() {
@@ -36,6 +40,7 @@ export default class Verimi {
   }
 
   requestToken(code) {
+    console.log(this.options);
     const url = `https://verimi.com/dipp/api/oauth/token?grant_type=authorization_code&code=${code}&redirect_uri=${encodeURIComponent(this.redirectUrl)}`;
     const auth = new Buffer(([this.settings.clientId, this.settings.clientSecret].join(":"))).toString('base64');
     const options = {
@@ -75,31 +80,31 @@ export default class Verimi {
     return this.users.findOne({"profile.token": id_token});
   }
 
-  startFlow() {
+  startFlow(options) {
+    this.options = options;
     document.location = this.verimiTokenUrl;
   }
 
-  endFlow() {
-    document.location = ""
-  }
-
-  finishLogin(code) {
+  finishLogin(code, completion, options) {
+    this.options = options;
     console.log(`logging in with ${code}`);
-    Meteor.call('finishLogin', code, (error, result) => {
+    Meteor.call('finishLogin', code, options, (error, result) => {
       if (error) {
         console.error(error);
       } else {
         console.log(`setting user id: ${result}`);
         Meteor.connection.setUserId(result);
-        reactHistory.push("/chat")
+        completion();
       }
     });
   }
 }
 
 Meteor.methods({
-  finishLogin(code){
+  finishLogin(code, options){
+    console.log("new verimi with:", options);
     const verimi = new Verimi();
+    verimi.options = options;
     if(!this.isSimulation){
       const user = verimi.requestToken(code);
       this.setUserId(user._id);
