@@ -27,7 +27,7 @@ class Start extends Component {
           Verwaltung.io helps you to get your application work done.
           <br/>
           All you need is a verimi account.
-          <br/>
+          <span className="Spacer"/>
           <span className="Button" onClick={this.start.bind(this)}>Start</span>
         </p>
       </main>
