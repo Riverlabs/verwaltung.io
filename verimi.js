@@ -4,7 +4,7 @@ import { Random } from 'meteor/random';
 
 export default class Verimi {
   get redirectUrl(){
-    return "http://localhost:3000/verimi";
+    return `${Meteor.absoluteUrl()}verimi`;
   }
 
   get verimiTokenUrl() {
