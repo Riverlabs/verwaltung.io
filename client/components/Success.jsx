@@ -16,7 +16,7 @@ export default class Success extends Component {
           </div>
         </div>
         <div className="Line">
-          <a href="/document.pdf" className="Button" target="new">Download</a>
+          <a href="/case/129783.pdf" className="Button" target="new">Download</a>
           <div onClick={() => this.props.onFinish()} className="Button">Send Now</div>
         </div>
       </div>
