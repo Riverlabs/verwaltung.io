@@ -10,7 +10,7 @@ export default class Sending extends Component {
   render() {
     return (
       <div>
-        <h1>sending</h1>
+        <h1>sending your document...</h1>
       </div>
     );
   }

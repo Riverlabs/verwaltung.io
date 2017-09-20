@@ -30,6 +30,12 @@
 
 .MaxWidth {
   width: 180px;
+  height: auto;
+}
+
+.Small {
+  width: 120px;
+  height: auto;
 }
 
 .BoxSelect {
@@ -41,6 +47,15 @@
     background-color: white;
     border-radius: 5px;
     padding: 1em;
+    margin-right: 1em;
+  }
+}
+
+.Line {
+  display: flex;
+
+  > * {
+    cursor: pointer;
     margin-right: 1em;
   }
 }

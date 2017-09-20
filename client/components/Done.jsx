@@ -6,7 +6,9 @@ export default class Done extends Component {
   render() {
     return (
       <div>
-        <h1>Successfully sent</h1>
+        <h1>Your form was successfully sent.</h1>
+        <div className="Spacer"/>
+        <a className="Button" href="/">Back to Home</a>
       </div>
     );
   }
