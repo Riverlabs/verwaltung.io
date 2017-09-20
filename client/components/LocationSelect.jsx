@@ -13,9 +13,11 @@ export default class LocationSelect extends Component {
   render() {
     return (
       <div>
-        <h1>Select your Location</h1>
+        <h1>What will be the address of the company?</h1>
         <form onSubmit={this.selectLocation.bind(this)}>
-          <input type="search" name="location"/>
+          <input className="Input" type="search" name="location"/>
+          <div className="Spacer" />
+          <input type="submit" value="Continue" className="Button"/>
         </form>
       </div>
     );

@@ -62,7 +62,10 @@ class Chat extends Component {
         return <LocationSelect conversation={this.props.conversation} onFinish={this.goToNextStep.bind(this)}/>
       case "login":
         return (
-          <div onClick={this.login.bind(this)}>Login</div>
+          <div>
+            <h1>Now sign-in into your verimi account:</h1>
+            <img className="MaxWidth" onClick={this.login.bind(this)} src="/button.png"/>
+          </div>
         )
       case "token":
         return (
@@ -89,7 +92,10 @@ class Chat extends Component {
     const messages = conversation.messages || [];
     const message = messages[this.props.step];
     return (
-      <main>
+      <main className="Container">
+        <div className="Header">
+          <img src="Header-logo" src="/logo.svg"/>
+        </div>
         { this.renderMessage(message) }
       </main>
     );

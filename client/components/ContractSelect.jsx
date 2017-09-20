@@ -11,12 +11,19 @@ export default class ContractSelect extends Component {
   render() {
     return (
       <div>
-        <h1>Select your contract</h1>
-        {
-          Contracts.map((contract, index) => {
-            return <div key={index} onClick={this.selectContract.bind(this, contract)}>{contract.name}</div>
-          })
-        }
+        <h1>Which application are you looking for?</h1>
+        <div className="BoxSelect">
+          {
+            Contracts.map((contract, index) => {
+              return (
+                <div key={index} onClick={this.selectContract.bind(this, contract)}>
+                  <img src={contract.image}/>
+                  <h2>{contract.name}</h2>
+                </div>
+              )
+            })
+          }
+        </div>
       </div>
     );
   }

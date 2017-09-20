@@ -1,0 +1,61 @@
+@import "variables";
+
+.Container {
+  max-width: 600px;
+  padding: 0 2em;
+  margin: 0 auto;
+}
+
+.Header {
+  padding: 80px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.Button {
+  display: inline-block;
+  background-color: $color-tint;
+  padding: 10px 30px;
+  border-radius: 3px;
+  appearance: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.Spacer {
+  display: block;
+  height: 30px;
+}
+
+.MaxWidth {
+  width: 180px;
+}
+
+.BoxSelect {
+  display: flex;
+
+  > * {
+    cursor: pointer;
+    width: 200px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 1em;
+    margin-right: 1em;
+  }
+}
+
+.Input {
+  display: block;
+  width: 100%;
+  padding: 20px;
+  appearance: none;
+  border: none;
+  outline: none;
+  box-shadow: 0 0 20px #d6d6d6;
+  border-radius: 5px;
+}
+
+.center {
+  text-align: center;
+}
