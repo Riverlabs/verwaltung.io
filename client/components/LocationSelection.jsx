@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
+import { Conversations } from '../../lib/collections';
 
 class LocationSelection extends Component {
   onSubmit(event) {
     event.preventDefault();
+    Conversations.update({ _id: this.props.conversation._id }, { $set: { location: event.target.location.value } })
     reactHistory.push("/login")
   }
 
@@ -12,7 +14,7 @@ class LocationSelection extends Component {
       <main>
         <h1>wo?</h1>
         <form onSubmit={this.onSubmit.bind(this)}>
-          <input type="search"/>
+          <input name="location" type="search"/>
         </form>
       </main>
     );
@@ -20,5 +22,7 @@ class LocationSelection extends Component {
 }
 
 export default withTracker((query) => {
-  return {  };
+  return {
+    conversation: Conversations.findOne({})
+  };
 })(LocationSelection);

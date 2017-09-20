@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
+import { Contracts, Conversations } from '../../lib/collections';
 
 class ContractSelection extends Component {
   selectContract(contract){
+    Conversations.update({_id: this.props.conversation._id}, { $set: { contract: contract } })
     reactHistory.push("/location");
   }
 
@@ -22,13 +24,7 @@ class ContractSelection extends Component {
 
 export default withTracker((query) => {
   return {
-    contracts: [
-      {
-        name: "Gewerbeanmeldung"
-      },
-      {
-        name: "A38"
-      }
-    ]
+    contracts: Contracts,
+    conversation: Conversations.findOne({})
   };
 })(ContractSelection);
