@@ -54,7 +54,7 @@ export default class Verimi {
       basket.data.forEach(value => {
         data[value.name] = value.value;
       });
-      basketData[basket.scopeId] = data;
+      basketData[basket.scopeId.replace("r_", "")] = data;
     });
     var user = this.users.findOne({"profile.token": id_token});
     if(user) {

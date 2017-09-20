@@ -3,7 +3,6 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Conversations } from '../../lib/collections';
 import { Random } from 'meteor/random';
 import { Meteor } from 'meteor/meteor';
-import Verimi from "../../verimi";
 
 class Chat extends Component {
   sendMessage(event){
@@ -13,10 +12,8 @@ class Chat extends Component {
     Conversations.update({_id: this.props.conversation._id}, { $push: { messages: message} });
   }
 
-  verimi = new Verimi()
-
-  login(event) {
-    this.verimi.startFlow()
+  confirm() {
+    reactHistory.push("/confirmation")
   }
 
   render() {
@@ -34,10 +31,10 @@ class Chat extends Component {
             return <div key={index}>{message.text}</div>
           })
         }
+        <div onClick={this.confirm.bind(this)}>Done!</div>
         <form onSubmit={this.sendMessage.bind(this)}>
           <input name="text"/>
         </form>
-        <div onClick={this.login.bind(this)}>verimi</div>
       </main>
     );
   }
